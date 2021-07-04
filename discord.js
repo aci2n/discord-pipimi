@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
-const moment = require('moment');
 const client = new Discord.Client();
 const process = require('process');
+const mlEmbed = require('./ml-embed');
 const API_KEY = process.env.DISCORD_API_KEY;
 
 if (!API_KEY) {
@@ -11,6 +11,9 @@ if (!API_KEY) {
 
 client.on('message', message => {
     console.log(message);
+    if (message.channel.name === 'bot_log' && message.content === 'embedme') {
+        message.channel.send(mlEmbed.createEmbed({todo: 'todo'}));
+    }
 });
 
 client.login(API_KEY);
