@@ -17,7 +17,7 @@ client.on('message', message => {
 
     if (isMeliUrl(message.content)) {
         getItemInfo(extractItemId(message.content)).then(res =>
-            message.channel.send(JSON.stringify(res.data).substring(0,200))
+            message.channel.send(mlEmbed.itemEmbed(res.data))
         );
     }
     
