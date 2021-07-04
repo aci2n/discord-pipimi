@@ -2,10 +2,12 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const process = require('process');
 const mlEmbed = require('./ml-embed');
-const API_KEY = process.env.DISCORD_API_KEY;
+
+const API_KEY_NAME = 'PIPIMI_API_KEY';
+const API_KEY = process.env[API_KEY_NAME];
 
 if (!API_KEY) {
-    console.error("Should have a Discord API key in the $DISCORD_API_KEY environment variable");
+    console.error(`should have a Discord API key in the ${API_KEY_NAME} environment variable`);
     process.exit(1);
 }
 

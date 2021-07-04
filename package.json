@@ -1,26 +1,24 @@
 {
-    "name": "hola-benju-bot",
+    "name": "discord-pipimi",
     "version": "0.0.1",
     "description": "This is a Discord bot.",
-    "main": "server.js",
+    "main": "pipimi.js",
     "scripts": {
-        "start": "node server.js"
+        "start": "node pipimi.js"
     },
     "dependencies": {
-        "discord.js": "^11.3.0",
-        "express": "^4.16.2",
-        "moment": "^2.29.1"
+        "discord.js": "^12.5.3"
     },
     "engines": {
-        "node": "8.x"
+        "node": "16.x"
     },
     "repository": {
-        "url": "https://github.com/sant1g/hola-benju-bot"
+        "url": "https://github.com/acalace/discord-pipime"
     },
-    "license": "MIT",
+    "license": "GPLv3",
     "keywords": [
         "node",
-        "glitch",
-        "express"
+        "pipimi",
+        "discord"
     ]
 }
