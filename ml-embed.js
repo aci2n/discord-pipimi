@@ -1,19 +1,16 @@
 const Discord = require('discord.js');
 
-function itemEmbed(item) {
-    // inside a command, event listener, etc.
+function itemEmbed(message, item) {
     const embed = new Discord.MessageEmbed()
         .setColor('#ffe600')
         .setTitle(item.title)
         .setURL(item.permalink)
         // .setDescription(item.id)
         .addField('Precio', `${item.currency_id} ${item.price}`, false)
-        .addFields(
-            item.attributes.sort(isGamerSort).slice(0, 12).map(attribute => mapAttribute(attribute))
-        )
+        .addFields(item.attributes.sort(isGamerSort).slice(0, 12).map(attribute => mapAttribute(attribute)))
         .setTimestamp()
         .setThumbnail(item.secure_thumbnail)
-        .setFooter('discord-pipimi', "https://static.mlstatic.com/org-img/homesnw/img/ml-logo.png?v=3.0");
+        .setFooter(message.author.username, "https://static.mlstatic.com/org-img/homesnw/img/ml-logo.png?v=3.0");
 
     // if (item.pictures.length > 0) {
     //     embed.setImage(item.pictures[Math.floor(Math.random() * item.pictures.length)].secure_url);
