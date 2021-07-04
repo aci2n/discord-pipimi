@@ -1,0 +1,26 @@
+{
+    "name": "hola-benju-bot",
+    "version": "0.0.1",
+    "description": "This is a Discord bot.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "discord.js": "^11.3.0",
+        "express": "^4.16.2",
+        "moment": "^2.29.1"
+    },
+    "engines": {
+        "node": "8.x"
+    },
+    "repository": {
+        "url": "https://github.com/sant1g/hola-benju-bot"
+    },
+    "license": "MIT",
+    "keywords": [
+        "node",
+        "glitch",
+        "express"
+    ]
+}
