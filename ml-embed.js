@@ -3,17 +3,14 @@ const Discord = require('discord.js');
 function itemEmbed(item) {
     // inside a command, event listener, etc.
     const embed = new Discord.MessageEmbed()
-        .setColor('#0099ff')
+        .setColor('#ffe600')
         .setTitle(item.title)
         .setURL(item.permalink)
-        .setDescription('Some description here')
+        .setDescription(item.id)
+        .addField('Precio', `${item.currency_id} ${item.price}`, false)
         .addFields(
-            { name: 'Regular field title', value: 'Some value here' },
-            { name: '\u200B', value: '\u200B' },
-            { name: 'Inline field title', value: 'Some value here', inline: true },
-            { name: 'Inline field title', value: 'Some value here', inline: true },
+            item.attributes.sort(isGamerSort).slice(0, 9).map(attribute => mapAttribute(attribute))
         )
-        .addField('Inline field title', 'Some value here', true)
         .setTimestamp()
         .setThumbnail(item.secure_thumbnail)
         .setFooter('discord-pipimi', "https://static.mlstatic.com/org-img/homesnw/img/ml-logo.png?v=3.0");
@@ -23,6 +20,18 @@ function itemEmbed(item) {
     }
 
     return embed;
+}
+
+function isGamerSort(a, b) {
+    return a.id === 'IS_GAMER' ? -1 : 0;
+}
+
+function mapAttribute(attribute) {
+    return {
+        name: attribute.name,
+        value: attribute.value_name === null ? 'No' : attribute.value_name,
+        inline: true
+    }
 }
 
 exports.itemEmbed = itemEmbed;
