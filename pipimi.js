@@ -25,6 +25,11 @@ client.on('message', message => {
             message.channel.send(JSON.stringify(res.data).substring(0,200))
         );
     }
+    
+    // test ML embed item
+    if (message.channel.name === 'bot_log' && message.content === 'embedme') {
+        message.channel.send(mlEmbed.itemEmbed(require('./test-item.json')));
+    }
 });
 
 const isMeliUrl = message => {
