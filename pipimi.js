@@ -14,11 +14,6 @@ if (!API_KEY) {
 
 client.on('message', message => {
     if (message.author.bot) return;
-    
-    console.log(message);
-    if (message.channel.name === 'bot_log' && message.content === 'embedme') {
-        message.channel.send(mlEmbed.createEmbed({ todo: 'todo' }));
-    }
 
     if (isMeliUrl(message.content)) {
         getItemInfo(extractItemId(message.content)).then(res =>
