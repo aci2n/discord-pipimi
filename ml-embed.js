@@ -6,18 +6,18 @@ function itemEmbed(item) {
         .setColor('#ffe600')
         .setTitle(item.title)
         .setURL(item.permalink)
-        .setDescription(item.id)
+        // .setDescription(item.id)
         .addField('Precio', `${item.currency_id} ${item.price}`, false)
         .addFields(
-            item.attributes.sort(isGamerSort).slice(0, 9).map(attribute => mapAttribute(attribute))
+            item.attributes.sort(isGamerSort).slice(0, 12).map(attribute => mapAttribute(attribute))
         )
         .setTimestamp()
         .setThumbnail(item.secure_thumbnail)
         .setFooter('discord-pipimi', "https://static.mlstatic.com/org-img/homesnw/img/ml-logo.png?v=3.0");
 
-    if (item.pictures.length > 0) {
-        embed.setImage(item.pictures[Math.floor(Math.random() * item.pictures.length)].secure_url);
-    }
+    // if (item.pictures.length > 0) {
+    //     embed.setImage(item.pictures[Math.floor(Math.random() * item.pictures.length)].secure_url);
+    // }
 
     return embed;
 }
