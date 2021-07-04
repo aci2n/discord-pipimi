@@ -1,10 +1,39 @@
 const Discord = require('discord.js');
-const moment = require('moment');
 const client = new Discord.Client();
+const axios = require('axios');
 
 client.on('message', message => {
-  
+  if (message.author.bot) return;
+
+  if (isMeliUrl(message.content)) {
+    const itemId = extractItemId(message.content);
+    getItemInfo(itemId).then(res =>
+      message.channel.send(JSON.stringify(res.data).substring(0,200))
+    );
+  }
 });
 
+const isMeliUrl = message => {
+  return /articulo\.mercadolibre\.com\.ar/igm.test(message);
+}
 
-client.login("ODI5NDQxMzE4MjUzMjMyMjM4.YG4LbA.oNd7MeZexZae6rzJS-RsVn1O3Ro");
+const extractItemId = url => {
+  const splitted = url.replace('https://', '').split('/')[1].split('-');
+
+  return splitted[0] + splitted[1];
+}
+
+const getItemInfo = itemId => {
+  let res = axios({
+    url: `https://api.mercadolibre.com/items/${itemId}`,
+    method: 'get',
+    timeout: 8000,
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+
+  return res
+};
+
+client.login("NTA2MTI0ODY4MjAzNTc3MzQ1.W9XTgw.RhF1Eby100n695LkIwnUTjQBSO8");
