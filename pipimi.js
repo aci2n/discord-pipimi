@@ -15,30 +15,33 @@ if (!API_KEY) {
 client.on('message', message => {
     if (message.author.bot) return;
 
-    if (isMeliUrl(message.content)) {
-        getItemInfo(extractItemId(message.content)).then(res =>
-            message.channel.send(mlEmbed.itemEmbed(res.data))
-        );
-    }
-    
-    // test ML embed item
-    if (message.channel.name === 'bot_log' && message.content === 'embedme') {
-        message.channel.send(mlEmbed.itemEmbed(require('./test-item.json')));
+    const meliId = extractMeliId(message.content);
+    if (meliId != null) {
+        getItemInfo(meliId)
+            .then(res => message.channel.send(mlEmbed.itemEmbed(res.data)))
+            .catch(err => console.error(err));
     }
 });
 
-const isMeliUrl = message => {
-    return /articulo\.mercadolibre\.com\.ar/igm.test(message);
-}
+const extractMeliId = (function () {
+    const matchers = [
+        /articulo\.mercadolibre\.com(?:\.\w{2,})?\/(\w+)-(\d+)/im
+        // /mercadolibre\.com(?:\.\w{2,})?\/.*?\/p\/(\w+)/im
+    ];
 
-const extractItemId = url => {
-    const splitted = url.replace('https://', '').split('/')[1].split('-');
-
-    return splitted[0] + splitted[1];
-}
+    return content => {
+        for (const matcher of matchers) {
+            const match = content.match(matcher);
+            if (match !== null) {
+                return match[1] + match[2];
+            }
+        }
+		return null;
+    }
+}());
 
 const getItemInfo = itemId => {
-    let res = axios({
+    return axios({
         url: `https://api.mercadolibre.com/items/${itemId}`,
         method: 'get',
         timeout: 8000,
@@ -46,8 +49,6 @@ const getItemInfo = itemId => {
             'Content-Type': 'application/json',
         }
     })
-
-    return res
 };
 
 client.login(API_KEY);

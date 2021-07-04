@@ -28,7 +28,7 @@ function isGamerSort(a, b) {
 
 function mapAttribute(attribute) {
     return {
-        name: attribute.name,
+        name: attribute.id === 'IS_GAMER' ? "Es ｇａｍｅｒ" : attribute.name,
         value: attribute.value_name === null ? 'No' : attribute.value_name,
         inline: true
     }
