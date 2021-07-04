@@ -19,6 +19,7 @@ client.on('message', message => {
     if (meliId != null) {
         getItemInfo(meliId)
             .then(res => message.channel.send(mlEmbed.itemEmbed(res.data)))
+            .then(sent => message.delete({timeout: 1, reason: "deleted by pipimi"}))
             .catch(err => console.error(err));
     }
 });
