@@ -12,9 +12,9 @@ if (!API_KEY) {
 }
 
 client.on('message', message => {
-    console.log(message);
+    // test ML embed item
     if (message.channel.name === 'bot_log' && message.content === 'embedme') {
-        message.channel.send(mlEmbed.createEmbed({todo: 'todo'}));
+        message.channel.send(mlEmbed.itemEmbed(require('./test-item.json')));
     }
 });
 

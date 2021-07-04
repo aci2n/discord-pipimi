@@ -1,0 +1,775 @@
+{
+    "id": "MLA926206435",
+    "site_id": "MLA",
+    "title": "Teclado Hyperx Alloy Origins 60 Mecánico Switch Hx",
+    "subtitle": null,
+    "seller_id": 608846165,
+    "category_id": "MLA418448",
+    "official_store_id": 2534,
+    "price": 13599,
+    "base_price": 13599,
+    "original_price": null,
+    "currency_id": "ARS",
+    "initial_quantity": 50,
+    "available_quantity": 1,
+    "sold_quantity": 5,
+    "sale_terms": [
+        {
+            "id": "WARRANTY_TYPE",
+            "name": "Tipo de garantía",
+            "value_id": "2230279",
+            "value_name": "Garantía de fábrica",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "2230279",
+                    "name": "Garantía de fábrica",
+                    "struct": null
+                }
+            ]
+        },
+        {
+            "id": "WARRANTY_TIME",
+            "name": "Tiempo de garantía",
+            "value_id": null,
+            "value_name": "12 meses",
+            "value_struct": {
+                "number": 12,
+                "unit": "meses"
+            },
+            "values": [
+                {
+                    "id": null,
+                    "name": "12 meses",
+                    "struct": {
+                        "number": 12,
+                        "unit": "meses"
+                    }
+                }
+            ]
+        }
+    ],
+    "buying_mode": "buy_it_now",
+    "listing_type_id": "gold_pro",
+    "start_time": "2021-06-18T14:48:26.000Z",
+    "stop_time": "2041-06-13T04:00:00.000Z",
+    "condition": "new",
+    "permalink": "https://articulo.mercadolibre.com.ar/MLA-926206435-teclado-hyperx-alloy-origins-60-mecanico-switch-hx-_JM",
+    "thumbnail_id": "708475-MLA46553206304_062021",
+    "thumbnail": "http://http2.mlstatic.com/D_708475-MLA46553206304_062021-I.jpg",
+    "secure_thumbnail": "https://http2.mlstatic.com/D_708475-MLA46553206304_062021-I.jpg",
+    "pictures": [
+        {
+            "id": "708475-MLA46553206304_062021",
+            "url": "http://http2.mlstatic.com/D_708475-MLA46553206304_062021-O.jpg",
+            "secure_url": "https://http2.mlstatic.com/D_708475-MLA46553206304_062021-O.jpg",
+            "size": "500x262",
+            "max_size": "855x449",
+            "quality": ""
+        },
+        {
+            "id": "740775-MLA46435087522_062021",
+            "url": "http://http2.mlstatic.com/D_740775-MLA46435087522_062021-O.jpg",
+            "secure_url": "https://http2.mlstatic.com/D_740775-MLA46435087522_062021-O.jpg",
+            "size": "500x500",
+            "max_size": "800x800",
+            "quality": ""
+        },
+        {
+            "id": "815085-MLA46553190394_062021",
+            "url": "http://http2.mlstatic.com/D_815085-MLA46553190394_062021-O.jpg",
+            "secure_url": "https://http2.mlstatic.com/D_815085-MLA46553190394_062021-O.jpg",
+            "size": "500x241",
+            "max_size": "686x332",
+            "quality": ""
+        },
+        {
+            "id": "710951-MLA46553192345_062021",
+            "url": "http://http2.mlstatic.com/D_710951-MLA46553192345_062021-O.jpg",
+            "secure_url": "https://http2.mlstatic.com/D_710951-MLA46553192345_062021-O.jpg",
+            "size": "500x412",
+            "max_size": "862x711",
+            "quality": ""
+        },
+        {
+            "id": "800585-MLA46553136587_062021",
+            "url": "http://http2.mlstatic.com/D_800585-MLA46553136587_062021-O.jpg",
+            "secure_url": "https://http2.mlstatic.com/D_800585-MLA46553136587_062021-O.jpg",
+            "size": "500x387",
+            "max_size": "861x668",
+            "quality": ""
+        },
+        {
+            "id": "726628-MLA46553199329_062021",
+            "url": "http://http2.mlstatic.com/D_726628-MLA46553199329_062021-O.jpg",
+            "secure_url": "https://http2.mlstatic.com/D_726628-MLA46553199329_062021-O.jpg",
+            "size": "500x323",
+            "max_size": "800x518",
+            "quality": ""
+        },
+        {
+            "id": "829927-MLA46553222166_062021",
+            "url": "http://http2.mlstatic.com/D_829927-MLA46553222166_062021-O.jpg",
+            "secure_url": "https://http2.mlstatic.com/D_829927-MLA46553222166_062021-O.jpg",
+            "size": "500x261",
+            "max_size": "855x447",
+            "quality": ""
+        },
+        {
+            "id": "736648-MLA46553162421_062021",
+            "url": "http://http2.mlstatic.com/D_736648-MLA46553162421_062021-O.jpg",
+            "secure_url": "https://http2.mlstatic.com/D_736648-MLA46553162421_062021-O.jpg",
+            "size": "408x500",
+            "max_size": "704x862",
+            "quality": ""
+        }
+    ],
+    "video_id": null,
+    "descriptions": [
+        {
+            "id": "MLA926206435-3563380782"
+        }
+    ],
+    "accepts_mercadopago": true,
+    "non_mercado_pago_payment_methods": [],
+    "shipping": {
+        "mode": "me2",
+        "free_methods": [
+            {
+                "id": 73328,
+                "rule": {
+                    "default": true,
+                    "free_mode": "country",
+                    "free_shipping_flag": true,
+                    "value": null
+                }
+            }
+        ],
+        "tags": [
+            "mandatory_free_shipping"
+        ],
+        "dimensions": null,
+        "local_pick_up": false,
+        "free_shipping": true,
+        "logistic_type": "fulfillment",
+        "store_pick_up": false
+    },
+    "international_delivery_mode": "none",
+    "seller_address": {
+        "city": {
+            "name": "Villa Celina"
+        },
+        "state": {
+            "id": "AR-B",
+            "name": "Buenos Aires"
+        },
+        "country": {
+            "id": "AR",
+            "name": "Argentina"
+        },
+        "search_location": {
+            "neighborhood": {
+                "id": "TVhYVmlsbGEgQ2VsaW5hVFV4QlEweEJUV0YwW",
+                "name": "Villa Celina"
+            },
+            "city": {
+                "id": "TUxBQ0xBTWF0YW56",
+                "name": "La Matanza"
+            },
+            "state": {
+                "id": "TUxBUEdSQWVmNTVm",
+                "name": "Bs.As. G.B.A. Oeste"
+            }
+        },
+        "id": 1118245173
+    },
+    "seller_contact": null,
+    "location": {},
+    "coverage_areas": [],
+    "attributes": [
+        {
+            "id": "BRAND",
+            "name": "Marca",
+            "value_id": "448156",
+            "value_name": "HyperX",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "448156",
+                    "name": "HyperX",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "CABLE_LENGTH",
+            "name": "Largo del cable",
+            "value_id": "129119",
+            "value_name": "1.8 m",
+            "value_struct": {
+                "number": 1.8,
+                "unit": "m"
+            },
+            "values": [
+                {
+                    "id": "129119",
+                    "name": "1.8 m",
+                    "struct": {
+                        "number": 1.8,
+                        "unit": "m"
+                    }
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "COMPATIBLE_GAME_CONSOLES",
+            "name": "Consolas de juegos compatibles",
+            "value_id": null,
+            "value_name": "PS4,PS5,Xbox Series XIS,Xbox One",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "9857813",
+                    "name": "PS4",
+                    "struct": null
+                },
+                {
+                    "id": null,
+                    "name": "PS5",
+                    "struct": null
+                },
+                {
+                    "id": null,
+                    "name": "Xbox Series XIS",
+                    "struct": null
+                },
+                {
+                    "id": "9857815",
+                    "name": "Xbox One",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "CONNECTOR_TYPE",
+            "name": "Tipo de conector",
+            "value_id": "433708",
+            "value_name": "USB-C",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "433708",
+                    "name": "USB-C",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "IS_ERGONOMIC",
+            "name": "Es ergonómica",
+            "value_id": "242085",
+            "value_name": "Sí",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242085",
+                    "name": "Sí",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "IS_GAMER",
+            "name": "Es gamer",
+            "value_id": "242085",
+            "value_name": "Sí",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242085",
+                    "name": "Sí",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "IS_ONE_HANDED",
+            "name": "Es para una mano",
+            "value_id": "242084",
+            "value_name": "No",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242084",
+                    "name": "No",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "IS_SPLASH_RESISTANT",
+            "name": "Es resistente a salpicaduras",
+            "value_id": "242084",
+            "value_name": "No",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242084",
+                    "name": "No",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "ITEM_CONDITION",
+            "name": "Condición del ítem",
+            "value_id": "2230284",
+            "value_name": "Nuevo",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "2230284",
+                    "name": "Nuevo",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "KEYBOARD_DEPTH",
+            "name": "Profundidad del teclado",
+            "value_id": null,
+            "value_name": "105 mm",
+            "value_struct": {
+                "number": 105,
+                "unit": "mm"
+            },
+            "values": [
+                {
+                    "id": null,
+                    "name": "105 mm",
+                    "struct": {
+                        "number": 105,
+                        "unit": "mm"
+                    }
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "KEYBOARD_HEIGHT",
+            "name": "Altura del teclado",
+            "value_id": null,
+            "value_name": "37 mm",
+            "value_struct": {
+                "number": 37,
+                "unit": "mm"
+            },
+            "values": [
+                {
+                    "id": null,
+                    "name": "37 mm",
+                    "struct": {
+                        "number": 37,
+                        "unit": "mm"
+                    }
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "KEYBOARD_WEIGHT",
+            "name": "Peso del teclado",
+            "value_id": "10570330",
+            "value_name": "781.5 g",
+            "value_struct": {
+                "number": 781.5,
+                "unit": "g"
+            },
+            "values": [
+                {
+                    "id": "10570330",
+                    "name": "781.5 g",
+                    "struct": {
+                        "number": 781.5,
+                        "unit": "g"
+                    }
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "KEYBOARD_WIDTH",
+            "name": "Ancho del teclado",
+            "value_id": "10570331",
+            "value_name": "296 mm",
+            "value_struct": {
+                "number": 296,
+                "unit": "mm"
+            },
+            "values": [
+                {
+                    "id": "10570331",
+                    "name": "296 mm",
+                    "struct": {
+                        "number": 296,
+                        "unit": "mm"
+                    }
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "KEYS_SHAPE",
+            "name": "Forma de las teclas",
+            "value_id": "111014",
+            "value_name": "Cilíndrica",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "111014",
+                    "name": "Cilíndrica",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "LINE",
+            "name": "Línea",
+            "value_id": "4239397",
+            "value_name": "Alloy",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "4239397",
+                    "name": "Alloy",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "MODEL",
+            "name": "Modelo",
+            "value_id": null,
+            "value_name": "HKBO1S-RB-US/G",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": null,
+                    "name": "HKBO1S-RB-US/G",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "PC_KEYBOARD_ARCHITECTURE",
+            "name": "Arquitectura",
+            "value_id": "108463",
+            "value_name": "Mecánico",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "108463",
+                    "name": "Mecánico",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_ANTI_GHOST_KEYS",
+            "name": "Con teclas anti-ghost",
+            "value_id": "242085",
+            "value_name": "Sí",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242085",
+                    "name": "Sí",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_BLUETOOTH",
+            "name": "Con Bluetooth",
+            "value_id": "242084",
+            "value_name": "No",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242084",
+                    "name": "No",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_DISPLAY",
+            "name": "Con pantalla",
+            "value_id": "242084",
+            "value_name": "No",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242084",
+                    "name": "No",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_HOTKEYS",
+            "name": "Con teclas de acceso rápido",
+            "value_id": "242085",
+            "value_name": "Sí",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242085",
+                    "name": "Sí",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_INTERFACE_USB",
+            "name": "Con interfaz USB",
+            "value_id": "242085",
+            "value_name": "Sí",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242085",
+                    "name": "Sí",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_NUMERIC_PAD",
+            "name": "Con pad numérico",
+            "value_id": "242084",
+            "value_name": "No",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242084",
+                    "name": "No",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_REMOVABLE_CABLE",
+            "name": "Con cable removible",
+            "value_id": "242085",
+            "value_name": "Sí",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242085",
+                    "name": "Sí",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_RETROILLUMINATION",
+            "name": "Con retroiluminación",
+            "value_id": "242085",
+            "value_name": "Sí",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242085",
+                    "name": "Sí",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_TOUCHPAD",
+            "name": "Con touchpad",
+            "value_id": "242084",
+            "value_name": "No",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242084",
+                    "name": "No",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_TRACKBALL",
+            "name": "Con trackball",
+            "value_id": "242084",
+            "value_name": "No",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242084",
+                    "name": "No",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_WIRELESS_CAPABILITY",
+            "name": "Con recepción inalámbrica",
+            "value_id": "242084",
+            "value_name": "No",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242084",
+                    "name": "No",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        },
+        {
+            "id": "WITH_WRIST_REST",
+            "name": "Con reposa muñeca",
+            "value_id": "242084",
+            "value_name": "No",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "242084",
+                    "name": "No",
+                    "struct": null
+                }
+            ],
+            "attribute_group_id": "OTHERS",
+            "attribute_group_name": "Otros"
+        }
+    ],
+    "warnings": [],
+    "listing_source": "",
+    "variations": [
+        {
+            "id": 88401266145,
+            "price": 13599,
+            "attribute_combinations": [
+                {
+                    "id": "KEYBOARD_COLOR",
+                    "name": "Color del teclado",
+                    "value_id": "52049",
+                    "value_name": "Negro",
+                    "value_struct": null,
+                    "values": [
+                        {
+                            "id": "52049",
+                            "name": "Negro",
+                            "struct": null
+                        }
+                    ]
+                },
+                {
+                    "id": "LANGUAGE",
+                    "name": "Idioma",
+                    "value_id": null,
+                    "value_name": "No",
+                    "value_struct": null,
+                    "values": [
+                        {
+                            "id": null,
+                            "name": "No",
+                            "struct": null
+                        }
+                    ]
+                }
+            ],
+            "available_quantity": 1,
+            "sold_quantity": 5,
+            "sale_terms": [],
+            "picture_ids": [
+                "708475-MLA46553206304_062021",
+                "740775-MLA46435087522_062021",
+                "815085-MLA46553190394_062021",
+                "710951-MLA46553192345_062021",
+                "800585-MLA46553136587_062021",
+                "726628-MLA46553199329_062021",
+                "829927-MLA46553222166_062021",
+                "736648-MLA46553162421_062021"
+            ],
+            "catalog_product_id": "MLA18025151"
+        }
+    ],
+    "status": "active",
+    "sub_status": [],
+    "tags": [
+        "catalog_listing_eligible",
+        "good_quality_picture",
+        "good_quality_thumbnail",
+        "immediate_payment",
+        "cart_eligible"
+    ],
+    "warranty": "Garantía de fábrica: 12 meses",
+    "catalog_product_id": "MLA18025150",
+    "domain_id": "MLA-PC_KEYBOARDS",
+    "parent_item_id": null,
+    "differential_pricing": null,
+    "deal_ids": [],
+    "automatic_relist": false,
+    "date_created": "2021-06-18T14:48:26.000Z",
+    "last_updated": "2021-07-03T19:59:12.000Z",
+    "health": 0.9,
+    "catalog_listing": false,
+    "channels": [
+        "marketplace"
+    ]
+}
