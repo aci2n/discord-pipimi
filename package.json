@@ -1,26 +1,25 @@
 {
-  "name": "discord-pipimi",
-  "version": "0.0.1",
-  "description": "This is a Discord bot.",
-  "main": "discord.js",
-  "scripts": {
-    "start": "node discord.js"
-  },
-  "dependencies": {
-    "axios": "^0.21.1",
-    "discord.js": "^11.3.0",
-    "express": "^4.16.2"
-  },
-  "engines": {
-    "node": "8.x"
-  },
-  "repository": {
-    "url": "https://github.com/aci2n/discord-pipimi"
-  },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+    "name": "discord-pipimi",
+    "version": "0.0.1",
+    "description": "This is a Discord bot.",
+    "main": "pipimi.js",
+    "scripts": {
+        "start": "node pipimi.js"
+    },
+    "dependencies": {
+        "discord.js": "^12.5.3",
+        "axios": "^0.21.1"
+    },
+    "engines": {
+        "node": "16.x"
+    },
+    "repository": {
+        "url": "https://github.com/acalace/discord-pipime"
+    },
+    "license": "GPLv3",
+    "keywords": [
+        "node",
+        "pipimi",
+        "discord"
+    ]
 }
