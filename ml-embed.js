@@ -5,7 +5,7 @@ const MAX_DESCRIPTION_LENGTH = 300;
 const MAX_FIELD_LENGTH = 30;
 
 function articleEmbed(message, article) {
-    console.log('creating embed for', article);
+    console.log('creating embed', article.item.id);
     const {item, description} = article;
     return new Discord.MessageEmbed()
         .setColor('#ffe600')
