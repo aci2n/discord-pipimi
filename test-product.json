@@ -1,0 +1,461 @@
+{
+    "id": "MLA15143240",
+    "status": "active",
+    "sold_quantity": 5041,
+    "domain_id": "MLA-COMPUTER_PROCESSORS",
+    "permalink": "https://www.mercadolibre.com.ar/procesador-gamer-amd-ryzen-5-3600-100-100000031box-de-6-nucleos-y-42ghz-de-frecuencia/p/MLA15143240",
+    "name": "Procesador gamer AMD Ryzen 5 3600 100-100000031BOX de 6 núcleos y  4.2GHz de frecuencia",
+    "buy_box_winner": {
+        "item_id": "MLA863361019",
+        "category_id": "MLA1693",
+        "seller_id": 91988078,
+        "price": 36499,
+        "currency_id": "ARS",
+        "sold_quantity": 100,
+        "available_quantity": 1,
+        "installments": {
+            "quantity": 1,
+            "amount": 36499,
+            "rate": 0,
+            "currency_id": "ARS"
+        },
+        "shipping": {
+            "mode": "me2",
+            "tags": [
+                "self_service_in",
+                "mandatory_free_shipping"
+            ],
+            "free_shipping": true,
+            "logistic_type": "cross_docking",
+            "store_pick_up": false
+        },
+        "warranty": "Garantía de fábrica: 12 meses",
+        "condition": "new",
+        "sale_terms": [
+            {
+                "id": "INVOICE",
+                "name": "Facturación",
+                "value_id": "6891885",
+                "value_name": "Factura A",
+                "value_struct": null
+            },
+            {
+                "id": "WARRANTY_TIME",
+                "name": "Tiempo de garantía",
+                "value_id": null,
+                "value_name": "12 meses",
+                "value_struct": {
+                    "number": 12,
+                    "unit": "meses"
+                }
+            },
+            {
+                "id": "WARRANTY_TYPE",
+                "name": "Tipo de garantía",
+                "value_id": "2230279",
+                "value_name": "Garantía de fábrica",
+                "value_struct": null
+            }
+        ],
+        "official_store_id": null,
+        "original_price": null,
+        "listing_type_id": "gold_special",
+        "accepts_mercadopago": true,
+        "seller_address": {
+            "city": {
+                "name": "Morón"
+            },
+            "state": {
+                "name": "Buenos Aires"
+            }
+        },
+        "international_delivery_mode": "none",
+        "tags": [
+            "good_quality_thumbnail",
+            "immediate_payment",
+            "loyalty_discount_eligible",
+            "cart_eligible",
+            "brand_verified",
+            "good_quality_picture"
+        ],
+        "item_override_attributes": [],
+        "deal_ids": [],
+        "tier": "",
+        "product_id": "MLA15143240",
+        "experiments": []
+    },
+    "pickers": null,
+    "pictures": [
+        {
+            "id": "717692-MLA40182401049_122019",
+            "url": "https://mla-s1-p.mlstatic.com/717692-MLA40182401049_122019-F.jpg",
+            "suggested_for_picker": [
+                "COLOR"
+            ],
+            "max_width": 970,
+            "max_height": 1038
+        },
+        {
+            "id": "702287-MLA40182401050_122019",
+            "url": "https://mla-s1-p.mlstatic.com/702287-MLA40182401050_122019-F.jpg",
+            "suggested_for_picker": [],
+            "max_width": 1205,
+            "max_height": 836
+        },
+        {
+            "id": "939359-MLA42157659246_062020",
+            "url": "https://mla-s2-p.mlstatic.com/939359-MLA42157659246_062020-F.jpg",
+            "suggested_for_picker": [],
+            "max_width": 1128,
+            "max_height": 728
+        }
+    ],
+    "main_features": [
+        {
+            "text": "Es ideal para jugadores y creadores de contenido que requieran un instrumento de gran ejecución.",
+            "type": "key_value",
+            "metadata": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "text": "Memoria caché de 32 MB, rápida y volátil.",
+            "type": "key_value",
+            "metadata": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "text": "Soporta memoria RAM DDR4.",
+            "type": "key_value",
+            "metadata": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "text": "Su potencia es de 65 W.",
+            "type": "key_value",
+            "metadata": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "text": "Cuenta con 12 hilos que favorecen la ejecución de múltiples programas a la vez.",
+            "type": "key_value",
+            "metadata": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "text": "Incluye air cooler.",
+            "type": "key_value",
+            "metadata": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "text": "Producto en empaque original.",
+            "type": "key_value",
+            "metadata": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "text": "Procesador innovador desarrollado bajo altos estándares de calidad. ",
+            "type": "key_value",
+            "metadata": {
+                "key": "",
+                "value": ""
+            }
+        }
+    ],
+    "attributes": [
+        {
+            "id": "BRAND",
+            "name": "Marca",
+            "value_id": "18034",
+            "value_name": "AMD",
+            "values": [
+                {
+                    "id": "18034",
+                    "name": "AMD"
+                }
+            ]
+        },
+        {
+            "id": "LINE",
+            "name": "Línea",
+            "value_id": "2244215",
+            "value_name": "Ryzen 5",
+            "values": [
+                {
+                    "id": "2244215",
+                    "name": "Ryzen 5"
+                }
+            ]
+        },
+        {
+            "id": "MODEL",
+            "name": "Modelo",
+            "value_id": "12072",
+            "value_name": "3600",
+            "values": [
+                {
+                    "id": "12072",
+                    "name": "3600"
+                }
+            ]
+        },
+        {
+            "id": "ALPHANUMERIC_MODEL",
+            "name": "Modelo alfanumérico",
+            "value_id": "7728280",
+            "value_name": "100-100000031BOX",
+            "values": [
+                {
+                    "id": "7728280",
+                    "name": "100-100000031BOX"
+                }
+            ]
+        },
+        {
+            "id": "SUPPORTED_RAM_MEMORY_TYPES",
+            "name": "Tipos de memoria RAM soportadas",
+            "value_id": "6991503",
+            "value_name": "DDR4",
+            "values": [
+                {
+                    "id": "6991503",
+                    "name": "DDR4"
+                }
+            ]
+        },
+        {
+            "id": "GENERATION",
+            "name": "Generación",
+            "value_id": "9215423",
+            "value_name": "3°",
+            "values": [
+                {
+                    "id": "9215423",
+                    "name": "3°"
+                }
+            ]
+        },
+        {
+            "id": "COMPATIBLE_SOCKETS",
+            "name": "Zócalos compatibles",
+            "value_id": "2273462",
+            "value_name": "AM4",
+            "values": [
+                {
+                    "id": "2273462",
+                    "name": "AM4"
+                }
+            ]
+        },
+        {
+            "id": "ARCHITECTURE",
+            "name": "Arquitectura",
+            "value_id": "927846",
+            "value_name": "x86-64",
+            "values": [
+                {
+                    "id": "927846",
+                    "name": "x86-64"
+                }
+            ]
+        },
+        {
+            "id": "APPLICATION",
+            "name": "Aplicación",
+            "value_id": "312347",
+            "value_name": "Computadoras de escritorio",
+            "values": [
+                {
+                    "id": "312347",
+                    "name": "Computadoras de escritorio"
+                }
+            ]
+        },
+        {
+            "id": "ACCESSORIES_INCLUDED",
+            "name": "Accesorios incluidos",
+            "value_id": "6991507",
+            "value_name": "Air cooler",
+            "values": [
+                {
+                    "id": "6991507",
+                    "name": "Air cooler"
+                }
+            ]
+        },
+        {
+            "id": "CPU_CORES_NUMBER",
+            "name": "Cantidad de núcleos de CPU",
+            "value_id": "2517488",
+            "value_name": "6",
+            "values": [
+                {
+                    "id": "2517488",
+                    "name": "6"
+                }
+            ]
+        },
+        {
+            "id": "MAX_RAM_MEMORY_SIZE_SUPPORTED",
+            "name": "Tamaño máximo de memoria RAM soportada",
+            "value_id": "4053161",
+            "value_name": "128 GB",
+            "values": [
+                {
+                    "id": "4053161",
+                    "name": "128 GB"
+                }
+            ]
+        },
+        {
+            "id": "MIN_CLOCK_FREQUENCY",
+            "name": "Frecuencia mínima de reloj",
+            "value_id": "3934809",
+            "value_name": "3.6 GHz",
+            "values": [
+                {
+                    "id": "3934809",
+                    "name": "3.6 GHz"
+                }
+            ]
+        },
+        {
+            "id": "MAX_CLOCK_FREQUENCY",
+            "name": "Frecuencia máxima de reloj",
+            "value_id": "121377",
+            "value_name": "4.2 GHz",
+            "values": [
+                {
+                    "id": "121377",
+                    "name": "4.2 GHz"
+                }
+            ]
+        },
+        {
+            "id": "CACHE",
+            "name": "Caché",
+            "value_id": "2090007",
+            "value_name": "32 MB",
+            "values": [
+                {
+                    "id": "2090007",
+                    "name": "32 MB"
+                }
+            ]
+        },
+        {
+            "id": "IS_GAMER",
+            "name": "Es gamer",
+            "value_id": "242085",
+            "value_name": "Sí",
+            "values": [
+                {
+                    "id": "242085",
+                    "name": "Sí",
+                    "meta": {
+                        "value": true
+                    }
+                }
+            ],
+            "meta": {
+                "value": true
+            }
+        },
+        {
+            "id": "IS_UNLOCKED",
+            "name": "Está desbloqueado",
+            "value_id": "242085",
+            "value_name": "Sí",
+            "values": [
+                {
+                    "id": "242085",
+                    "name": "Sí",
+                    "meta": {
+                        "value": true
+                    }
+                }
+            ],
+            "meta": {
+                "value": true
+            }
+        },
+        {
+            "id": "THERMAL_DESIGN_POWER",
+            "name": "Potencia de diseño térmico",
+            "value_id": "7504299",
+            "value_name": "65 W",
+            "values": [
+                {
+                    "id": "7504299",
+                    "name": "65 W"
+                }
+            ]
+        },
+        {
+            "id": "IS_OEM",
+            "name": "Es OEM",
+            "value_id": "242084",
+            "value_name": "No",
+            "values": [
+                {
+                    "id": "242084",
+                    "name": "No",
+                    "meta": {
+                        "value": false
+                    }
+                }
+            ],
+            "meta": {
+                "value": false
+            }
+        },
+        {
+            "id": "RELEASE_YEAR",
+            "name": "Año de lanzamiento",
+            "value_id": "5057727",
+            "value_name": "2019",
+            "values": [
+                {
+                    "id": "5057727",
+                    "name": "2019"
+                }
+            ]
+        },
+        {
+            "id": "CPU_THREADS_NUMBER",
+            "name": "Cantidad de hilos de CPU",
+            "value_id": "8584211",
+            "value_name": "12",
+            "values": [
+                {
+                    "id": "8584211",
+                    "name": "12"
+                }
+            ]
+        }
+    ],
+    "short_description": {
+        "type": "plaintext",
+        "content": "Clave en el rendimiento de tu computadora de escritorio, ya no tenés que pensar en cómo distribuir el tiempo y acciones porque ahora las tareas en simultáneo son posibles.\nAMD cuenta con un catálogo de productos que se adaptan a los requerimientos de todo tipo de usuarios: juegos en línea, edición a gran escala, contenido en múltiples plataformas y más.\n\nNúcleos: el corazón del procesador\nEn este producto, encontrarás los núcleos, que son los encargados de ejecutar las instrucciones y actividades que le asignás a tu dispositivo. Estos tienen relación directa con dos elementos: los hilos y el modelo. Por lo tanto, a la hora de elegir un procesador, es importante que valores los tres en su conjunto.\n\nMáxima potencia\nAl estar desbloqueado, podrás realizar overclocking y así aumentar la frecuencia de funcionamiento y optimizar el rendimiento de tu equipo. Personalizalo a tu gusto y disfrutá de tus videojuegos o hacé que la renderización de imágenes sea más ágil. ¡Descubrí el abanico de posibilidades que esta función te ofrece!"
+    },
+    "parent_id": null,
+    "children_ids": [],
+    "settings": {
+        "listing_strategy": "open",
+        "has_rich_description": false
+    }
+}
