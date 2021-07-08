@@ -1,5 +1,6 @@
-const process = require('process');
-const axios = require('axios');
+import { argv, exit } from 'process';
+import axios from 'axios';
+import { fileURLToPath } from 'url';
 
 const extractors = [
     {
@@ -22,7 +23,7 @@ const getArticleFromItem = itemId => {
     console.log('fetching item and description', itemId);
     const itemUrl = `https://api.mercadolibre.com/items/${itemId}`;
     return Promise.all([simpleGet(itemUrl), simpleGet(itemUrl + '/description')])
-        .then(([item, description]) => ({item, description}));
+        .then(([item, description]) => ({ item, description }));
 };
 
 const simpleGet = url => {
@@ -49,24 +50,24 @@ const fetchArticle = content => {
 };
 
 const checkUrl = () => {
-    if (process.argv.length < 3) {
+    if (argv.length < 3) {
         console.error("Usage: node ml-fetch.js URL");
-        process.exit(1);
+        exit(1);
     }
 
-    const url = process.argv[2];
+    const url = argv[2];
     const result = fetchArticle(url);
 
     if (result != null) {
         result.then(article => console.log('found article', article.item.id))
-              .catch(error => console.log('error fetching article', JSON.stringify(error, null, 2)));
+            .catch(error => console.log('error fetching article', JSON.stringify(error, null, 2)));
     } else {
         console.log('no match detected', url);
     }
 };
 
-if (require.main === module) {
+if (argv[1] === fileURLToPath(import.meta.url)) {
     checkUrl();
 }
 
-exports.fetchArticle = fetchArticle;
+export { fetchArticle };

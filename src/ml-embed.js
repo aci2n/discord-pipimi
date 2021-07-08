@@ -1,14 +1,14 @@
-const Discord = require('discord.js');
+import { MessageEmbed } from 'discord.js';
 
 const MAX_FIELDS = 6;
 const MAX_DESCRIPTION_LENGTH = 300;
 const MAX_FIELD_LENGTH = 30;
 
 function articleEmbed(message, article) {
-    const {item, description} = article;
+    const { item, description } = article;
     console.log('creating embed', item.id);
 
-    return new Discord.MessageEmbed()
+    return new MessageEmbed()
         .setColor('#ffe600')
         .setTitle(item.title)
         .setURL(item.permalink)
@@ -20,9 +20,9 @@ function articleEmbed(message, article) {
         .setFooter(message.author.username, "https://static.mlstatic.com/org-img/homesnw/img/ml-logo.png?v=3.0");
 }
 
-const formatPrice = (function() {
+const formatPrice = (function () {
     const formatters = new Map();
-    formatters.set('ARS', Intl.NumberFormat('es-AR', {style: 'currency', currency: 'ARS'}));
+    formatters.set('ARS', Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }));
 
     return (price, currency) => {
         const formatter = formatters.get(currency);
@@ -47,4 +47,4 @@ function formatDisplayString(str, len) {
     return result.length <= len ? result : result.substring(0, len).trim() + '…';
 }
 
-exports.articleEmbed = articleEmbed;
+export { articleEmbed };

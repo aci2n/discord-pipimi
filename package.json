@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "description": "This is a Discord bot.",
     "main": "pipimi.js",
+    "type": "module",
     "scripts": {
         "start": "node src/pipimi.js"
     },
