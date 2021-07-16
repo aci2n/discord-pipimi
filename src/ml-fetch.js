@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 const extractors = [
     {
-        regexp: /articulo\.mercadolibre\.com(?:\.\w{2,})?\/(\w+)-(\d+)/im,
+        regexp: /mercadolibre\.com(?:\.\w{2,})?\/(\w+)-(\d+)/im,
         fetcher: match => getArticleFromItem(match[1] + match[2])
     },
     {
