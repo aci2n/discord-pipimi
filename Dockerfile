@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:17-alpine
 WORKDIR /pipimi
 COPY ["package.json", "package-lock.json", "./"]
 RUN npm install
