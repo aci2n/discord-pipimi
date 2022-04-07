@@ -2,6 +2,7 @@ import { Client } from 'discord.js';
 import { env, exit } from 'process';
 import { fetchArticle } from './ml-fetch.js'
 import { articleEmbed } from './ml-embed.js';
+import { processSergeant } from './sergeant.js';
 
 const client = new Client();
 const API_KEY_NAME = 'PIPIMI_API_KEY';
@@ -15,6 +16,7 @@ if (!API_KEY) {
 client.on('message', message => {
     if (message.author.bot) return;
     processMeliArticle(message);
+    processSergeant(client, message);
 });
 
 const processMeliArticle = message => {
