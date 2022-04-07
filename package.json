@@ -12,7 +12,7 @@
         "axios": "^0.21.1"
     },
     "engines": {
-        "node": "16.x"
+        "node": "17.x"
     },
     "repository": {
         "url": "https://github.com/acalace/discord-pipime"
