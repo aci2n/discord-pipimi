@@ -28,11 +28,11 @@ const messageHandler = async message => {
         await handleJishoCommand(message);
         await handleEval(message);
     } catch (e) {
-        console.error("An error occurred handling", message);
+        console.error("An error occurred", e, message);
         try {
             await message.channel.send("An error occurred: " + JSON.stringify(e));
         } catch (e) {
-            console.error("Failed to send error message :(");
+            console.error("Failed to send error message :(", e);
         }
     }
 };

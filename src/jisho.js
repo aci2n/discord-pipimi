@@ -2,24 +2,25 @@ import { Message, TextChannel } from "discord.js";
 import JishoAPI from "unofficial-jisho-api";
 
 const JISHO_API = new JishoAPI();
+const COMMANDS = [
+    { prefixes: ["!ji", "!jisho"], handler: (channel, message) => handlePhraseCommand(channel, message) },
+    { prefixes: ["!kanji"], handler: (channel, message) => handleKanjiCommand(channel, message) }
+]
 
 /**
  * @param {Message} message 
  */
 const handleJishoCommand = async message => {
     const { content } = message;
-    const index = content.indexOf(" ");
-    const command = content.substring(0, index);
-    const args = content.substring(index + 1);
 
-    switch (command) {
-        case "!ji":
-        case "!jisho":
-            await handlePhraseCommand(message.channel, args);
-            break;
-        case "!kanji":
-            await handleKanjiCommand(message.channel, args);
-            break;
+    for (const command of COMMANDS) {
+        for (const prefix of command.prefixes) {
+            if (content.startsWith(prefix)) {
+                const args = content.substring(prefix.length);
+                await command.handler(message.channel, args);
+                return;
+            }
+        }
     }
 };
 
