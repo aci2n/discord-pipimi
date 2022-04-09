@@ -13,7 +13,8 @@ const PERSONALIZED_MESSAGES = new Map([
  */
 const handleSergeantCommand = async message => {
     if (message.content.startsWith(COMMAND_PREFIX) && hasWhitelistedRole(message.member)) {
-        for (const member of message.mentions.members) {
+        for (const user of message.mentions.users.values()) {
+            const member = await new GuildMember(message.client, { user }, message.guild).fetch();
             await moveToJail(member.id, member.voice, message.channel);
         }
     }
