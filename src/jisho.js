@@ -8,8 +8,9 @@ const JISHO_API = new JishoAPI();
  */
 const handleJishoCommand = async message => {
     const { content } = message;
-    // args can be undefined
-    const [command, args] = content.split(" ", 2);
+    const index = content.indexOf(" ");
+    const command = content.substring(0, index);
+    const args = content.substring(index + 1);
 
     switch (command) {
         case "!ji":
