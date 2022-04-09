@@ -3,6 +3,7 @@ import { env, exit } from 'process';
 import { handleJishoCommand } from './jisho.js';
 import { handleMeliCommand } from './ml-fetch.js'
 import { handleSergeantCommand } from './sergeant.js';
+import { handleEval } from './eval.js';
 
 const client = new Client();
 const API_KEY_NAME = 'PIPIMI_API_KEY';
@@ -19,6 +20,7 @@ client.on('message', message => {
     handleMeliCommand(message);
     handleSergeantCommand(message);
     handleJishoCommand(message);
+    handleEval(message);
 });
 
 client.login(API_KEY);
