@@ -1,4 +1,4 @@
-import { Client } from 'discord.js';
+import { Client, Message } from 'discord.js';
 import { env, exit } from 'process';
 import { handleJishoCommand } from './jisho.js';
 import { handleMeliCommand } from './ml-fetch.js'
@@ -14,18 +14,24 @@ if (!API_KEY) {
     exit(1);
 }
 
-client.on('message', message => {
-    if (message.author.bot) return;
+/**
+ * @param {Message} message
+ */
+const messageHandler = async message => {
+    if (message.author.bot) {
+        return;
+    }
 
     try {
-        handleMeliCommand(message);
-        handleSergeantCommand(message);
-        handleJishoCommand(message);
-        handleEval(message);
-    } catch(e) {
-        console.error("An error occurred handling: ", message);
-        await message.vchannel.send("An error occurred.");
+        await handleMeliCommand(message);
+        await handleSergeantCommand(message);
+        await handleJishoCommand(message);
+        await handleEval(message);
+    } catch (e) {
+        console.error("An error occurred handling", message);
+        await message.channel.send("An error occurred: " + JSON.stringify(e));
     }
-});
+};
 
+client.on('message', messageHandler);
 client.login(API_KEY);

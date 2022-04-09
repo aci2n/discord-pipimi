@@ -11,9 +11,11 @@ const PERSONALIZED_MESSAGES = new Map([
 /**
  * @param {Message} message 
  */
-const handleSergeantCommand = (message) => {
+const handleSergeantCommand = async message => {
     if (message.content.startsWith(COMMAND_PREFIX) && hasWhitelistedRole(message.member)) {
-        message.mentions.members.forEach(member => moveToJail(member.id, member.voice, message.channel));
+        for (const member of message.mentions.members) {
+            await moveToJail(member.id, member.voice, message.channel);
+        }
     }
 };
 
