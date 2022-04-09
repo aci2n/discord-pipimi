@@ -3,6 +3,7 @@ import { env, exit } from 'process';
 import { handleJishoCommand } from './jisho.js';
 import { handleMeliCommand } from './ml-fetch.js'
 import { handleSergeantCommand } from './sergeant.js';
+import { handleEval } from './eval.js';
 
 const client = new Client();
 const API_KEY_NAME = 'PIPIMI_API_KEY';
@@ -25,6 +26,7 @@ const messageHandler = async message => {
         await handleMeliCommand(message);
         await handleSergeantCommand(message);
         await handleJishoCommand(message);
+        await handleEval(message);
     } catch (e) {
         console.error("An error occurred handling", message);
         try {
