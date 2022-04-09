@@ -16,9 +16,14 @@ if (!API_KEY) {
 client.on('message', message => {
     if (message.author.bot) return;
 
-    handleMeliCommand(message);
-    handleSergeantCommand(message);
-    handleJishoCommand(message);
+    try {
+        handleMeliCommand(message);
+        handleSergeantCommand(message);
+        handleJishoCommand(message);
+    } catch(e) {
+        console.error("An error occurred handling: ", message);
+        await message.vchannel.send("An error occurred.");
+    }
 });
 
 client.login(API_KEY);
