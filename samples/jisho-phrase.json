@@ -1,0 +1,982 @@
+{
+    "meta": {
+        "status": 200
+    },
+    "data": [
+        {
+            "slug": "俺",
+            "is_common": true,
+            "tags": [
+                "wanikani44"
+            ],
+            "jlpt": [
+                "jlpt-n1"
+            ],
+            "japanese": [
+                {
+                    "word": "俺",
+                    "reading": "おれ"
+                },
+                {
+                    "word": "己",
+                    "reading": "おれ"
+                },
+                {
+                    "word": "俺",
+                    "reading": "おらあ"
+                },
+                {
+                    "word": "俺",
+                    "reading": "おり"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "I",
+                        "me"
+                    ],
+                    "parts_of_speech": [
+                        "Pronoun"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Male term or language"
+                    ],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": [
+                        "rough or arrogant"
+                    ]
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "己-2",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "己",
+                    "reading": "おら"
+                },
+                {
+                    "word": "己",
+                    "reading": "うら"
+                },
+                {
+                    "word": "俺",
+                    "reading": "おら"
+                },
+                {
+                    "word": "俺",
+                    "reading": "うら"
+                },
+                {
+                    "word": "俺ら",
+                    "reading": "おら"
+                },
+                {
+                    "word": "俺ら",
+                    "reading": "うら"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "I",
+                        "me"
+                    ],
+                    "parts_of_speech": [
+                        "Pronoun"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Male term or language",
+                        "Archaism"
+                    ],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": [
+                        "dialectal in contemporary Japanese"
+                    ]
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "俺たち",
+            "is_common": false,
+            "tags": [
+                "wanikani44"
+            ],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺たち",
+                    "reading": "おれたち"
+                },
+                {
+                    "word": "俺達",
+                    "reading": "おれたち"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "we",
+                        "us"
+                    ],
+                    "parts_of_speech": [
+                        "Noun"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Male term or language"
+                    ],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "俺ら",
+            "is_common": false,
+            "tags": [
+                "wanikani44"
+            ],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺ら",
+                    "reading": "おれら"
+                },
+                {
+                    "word": "俺ら",
+                    "reading": "おいら"
+                },
+                {
+                    "word": "俺等",
+                    "reading": "おれら"
+                },
+                {
+                    "word": "俺等",
+                    "reading": "おいら"
+                },
+                {
+                    "word": "己等",
+                    "reading": "おれら"
+                },
+                {
+                    "word": "己等",
+                    "reading": "おいら"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "we",
+                        "us"
+                    ],
+                    "parts_of_speech": [
+                        "Pronoun"
+                    ],
+                    "links": [],
+                    "tags": [],
+                    "restrictions": [
+                        "おれら"
+                    ],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                },
+                {
+                    "english_definitions": [
+                        "I",
+                        "me"
+                    ],
+                    "parts_of_speech": [
+                        "Pronoun"
+                    ],
+                    "links": [],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": [
+                        "esp. おいら"
+                    ]
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "俺様",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺様",
+                    "reading": "おれさま"
+                },
+                {
+                    "word": "己様",
+                    "reading": "おれさま"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "I",
+                        "me"
+                    ],
+                    "parts_of_speech": [
+                        "Pronoun"
+                    ],
+                    "links": [],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": [
+                        "pompous"
+                    ]
+                },
+                {
+                    "english_definitions": [
+                        "self-centered man",
+                        "egotistical man",
+                        "pompous man"
+                    ],
+                    "parts_of_speech": [
+                        "Noun"
+                    ],
+                    "links": [],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "俺っち",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺っち",
+                    "reading": "おれっち"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "we",
+                        "us"
+                    ],
+                    "parts_of_speech": [
+                        "Pronoun"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Male term or language"
+                    ],
+                    "restrictions": [],
+                    "see_also": [
+                        "俺達"
+                    ],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                },
+                {
+                    "english_definitions": [
+                        "I",
+                        "me"
+                    ],
+                    "parts_of_speech": [
+                        "Pronoun"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Male term or language",
+                        "Colloquialism"
+                    ],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "俺的",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺的",
+                    "reading": "おれてき"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "my personal (e.g. opinion)"
+                    ],
+                    "parts_of_speech": [
+                        "Na-adjective (keiyodoshi)"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Male term or language",
+                        "Colloquialism"
+                    ],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "俺が俺が",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺が俺が",
+                    "reading": "おれがおれが"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "me, me, me"
+                    ],
+                    "parts_of_speech": [
+                        "Expressions (phrases, clauses, etc.)"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Male term or language"
+                    ],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                },
+                {
+                    "english_definitions": [
+                        "egotistic",
+                        "ego-driven"
+                    ],
+                    "parts_of_speech": [
+                        "Expressions (phrases, clauses, etc.)",
+                        "Noun which may take the genitive case particle 'no'"
+                    ],
+                    "links": [],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "俺んち",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺んち",
+                    "reading": "おれんち"
+                },
+                {
+                    "word": "俺ん家",
+                    "reading": "おれんち"
+                },
+                {
+                    "word": "オレん家",
+                    "reading": "オレんち"
+                },
+                {
+                    "reading": "オレンチ"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "my house"
+                    ],
+                    "parts_of_speech": [
+                        "Noun"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Abbreviation",
+                        "Male term or language"
+                    ],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": [
+                        "from おれのうち"
+                    ]
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "俺等達",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺等達",
+                    "reading": "おいらっち"
+                },
+                {
+                    "word": "己等達",
+                    "reading": "おいらっち"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "we",
+                        "us"
+                    ],
+                    "parts_of_speech": [
+                        "Noun"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Archaism",
+                        "Male term or language"
+                    ],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "俺女",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺女",
+                    "reading": "おれおんな"
+                },
+                {
+                    "word": "オレ女",
+                    "reading": "おれおんな"
+                },
+                {
+                    "word": "おれ女",
+                    "reading": "おれおんな"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "tomboy",
+                        "boyish girl"
+                    ],
+                    "parts_of_speech": [
+                        "Noun"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Colloquialism"
+                    ],
+                    "restrictions": [],
+                    "see_also": [
+                        "おてんば娘"
+                    ],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "オレっ娘",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "オレっ娘",
+                    "reading": "オレっこ"
+                },
+                {
+                    "word": "オレっ子",
+                    "reading": "オレっこ"
+                },
+                {
+                    "word": "俺っ娘",
+                    "reading": "おれっこ"
+                },
+                {
+                    "word": "俺娘",
+                    "reading": "おれっこ"
+                },
+                {
+                    "word": "俺っ子",
+                    "reading": "おれっこ"
+                },
+                {
+                    "word": "俺子",
+                    "reading": "おれっこ"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "young woman who uses the first person pronoun \"ore\""
+                    ],
+                    "parts_of_speech": [
+                        "Noun"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Manga slang"
+                    ],
+                    "restrictions": [],
+                    "see_also": [
+                        "俺 おれ"
+                    ],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "オレ流",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "オレ流",
+                    "reading": "オレりゅう"
+                },
+                {
+                    "word": "俺流",
+                    "reading": "おれりゅう"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "one's own way (esp. of an assertive man)",
+                        "one's own approach"
+                    ],
+                    "parts_of_speech": [
+                        "Noun"
+                    ],
+                    "links": [],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "俺氏",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺氏",
+                    "reading": "おれし"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "I",
+                        "me"
+                    ],
+                    "parts_of_speech": [
+                        "Pronoun"
+                    ],
+                    "links": [],
+                    "tags": [
+                        "Internet slang",
+                        "Jocular, humorous term"
+                    ],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "オレオレ詐欺",
+            "is_common": false,
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "オレオレ詐欺",
+                    "reading": "オレオレさぎ"
+                },
+                {
+                    "word": "おれおれ詐欺",
+                    "reading": "おれおれさぎ"
+                },
+                {
+                    "word": "俺俺詐欺",
+                    "reading": "おれおれさぎ"
+                },
+                {
+                    "word": "俺おれ詐欺",
+                    "reading": "おれおれさぎ"
+                },
+                {
+                    "word": "おれ俺詐欺",
+                    "reading": "おれおれさぎ"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "phone scam involving calls from pretended relatives in distress"
+                    ],
+                    "parts_of_speech": [
+                        "Noun"
+                    ],
+                    "links": [],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": []
+                }
+            ],
+            "attribution": {
+                "jmdict": true,
+                "jmnedict": false,
+                "dbpedia": false
+            }
+        },
+        {
+            "slug": "51869ebcd5dda7b2c6081b1f",
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺たちダンクシューター"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "Semi-Pro"
+                    ],
+                    "parts_of_speech": [
+                        "Wikipedia definition"
+                    ],
+                    "links": [
+                        {
+                            "text": "Read “Semi-Pro” on English Wikipedia",
+                            "url": "http://en.wikipedia.org/wiki/Semi-Pro?oldid=494767470"
+                        },
+                        {
+                            "text": "Read “俺たちダンクシューター” on Japanese Wikipedia",
+                            "url": "http://ja.wikipedia.org/wiki/俺たちダンクシューター?oldid=42574688"
+                        }
+                    ],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": [],
+                    "sentences": []
+                }
+            ],
+            "attribution": {
+                "jmdict": false,
+                "jmnedict": false,
+                "dbpedia": "http://dbpedia.org/resource/Semi-Pro"
+            }
+        },
+        {
+            "slug": "51869da3d5dda7b2c60795b8",
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺にさわると危ないぜ"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "Black Tight Killers"
+                    ],
+                    "parts_of_speech": [
+                        "Wikipedia definition"
+                    ],
+                    "links": [
+                        {
+                            "text": "Read “Black Tight Killers” on English Wikipedia",
+                            "url": "http://en.wikipedia.org/wiki/Black_Tight_Killers?oldid=457687930"
+                        },
+                        {
+                            "text": "Read “俺にさわると危ないぜ” on Japanese Wikipedia",
+                            "url": "http://ja.wikipedia.org/wiki/俺にさわると危ないぜ?oldid=34193652"
+                        }
+                    ],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": [],
+                    "sentences": []
+                }
+            ],
+            "attribution": {
+                "jmdict": false,
+                "jmnedict": false,
+                "dbpedia": "http://dbpedia.org/resource/Black_Tight_Killers"
+            }
+        },
+        {
+            "slug": "51869e1ad5dda7b2c607ce4c",
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺がハマーだ!"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "Sledge Hammer!"
+                    ],
+                    "parts_of_speech": [
+                        "Wikipedia definition"
+                    ],
+                    "links": [
+                        {
+                            "text": "Read “Sledge Hammer!” on English Wikipedia",
+                            "url": "http://en.wikipedia.org/wiki/Sledge_Hammer!?oldid=492678452"
+                        },
+                        {
+                            "text": "Read “俺がハマーだ!” on Japanese Wikipedia",
+                            "url": "http://ja.wikipedia.org/wiki/俺がハマーだ!?oldid=42252380"
+                        }
+                    ],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": [],
+                    "sentences": []
+                }
+            ],
+            "attribution": {
+                "jmdict": false,
+                "jmnedict": false,
+                "dbpedia": "http://dbpedia.org/resource/Sledge_Hammer!"
+            }
+        },
+        {
+            "slug": "51869ac9d5dda7b2c6063a12",
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺たちニュースキャスター"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "Anchorman: The Legend of Ron Burgundy"
+                    ],
+                    "parts_of_speech": [
+                        "Wikipedia definition"
+                    ],
+                    "links": [
+                        {
+                            "text": "Read “Anchorman: The Legend of Ron Burgundy” on English Wikipedia",
+                            "url": "http://en.wikipedia.org/wiki/Anchorman:_The_Legend_of_Ron_Burgundy?oldid=495493152"
+                        },
+                        {
+                            "text": "Read “俺たちニュースキャスター” on Japanese Wikipedia",
+                            "url": "http://ja.wikipedia.org/wiki/俺たちニュースキャスター?oldid=40790272"
+                        }
+                    ],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": [],
+                    "sentences": []
+                }
+            ],
+            "attribution": {
+                "jmdict": false,
+                "jmnedict": false,
+                "dbpedia": "http://dbpedia.org/resource/Anchorman:_The_Legend_of_Ron_Burgundy"
+            }
+        },
+        {
+            "slug": "51869dc4d5dda7b2c607a509",
+            "tags": [],
+            "jlpt": [],
+            "japanese": [
+                {
+                    "word": "俺のルーツ"
+                }
+            ],
+            "senses": [
+                {
+                    "english_definitions": [
+                        "R.O.O.T.S."
+                    ],
+                    "parts_of_speech": [
+                        "Wikipedia definition"
+                    ],
+                    "links": [
+                        {
+                            "text": "Read “R.O.O.T.S.” on English Wikipedia",
+                            "url": "http://en.wikipedia.org/wiki/R.O.O.T.S.?oldid=495180858"
+                        },
+                        {
+                            "text": "Read “俺のルーツ” on Japanese Wikipedia",
+                            "url": "http://ja.wikipedia.org/wiki/俺のルーツ?oldid=39560708"
+                        }
+                    ],
+                    "tags": [],
+                    "restrictions": [],
+                    "see_also": [],
+                    "antonyms": [],
+                    "source": [],
+                    "info": [],
+                    "sentences": []
+                }
+            ],
+            "attribution": {
+                "jmdict": false,
+                "jmnedict": false,
+                "dbpedia": "http://dbpedia.org/resource/R.O.O.T.S."
+            }
+        }
+    ]
+}

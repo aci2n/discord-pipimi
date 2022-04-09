@@ -1,5 +1,6 @@
 import { Client } from 'discord.js';
 import { env, exit } from 'process';
+import { handleJishoCommand } from './jisho.js';
 import { handleMeliCommand } from './ml-fetch.js'
 import { handleSergeantCommand } from './sergeant.js';
 
@@ -14,9 +15,10 @@ if (!API_KEY) {
 
 client.on('message', message => {
     if (message.author.bot) return;
+
     handleMeliCommand(message);
     handleSergeantCommand(message);
+    handleJishoCommand(message);
 });
-
 
 client.login(API_KEY);
