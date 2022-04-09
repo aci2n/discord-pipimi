@@ -38,8 +38,9 @@ const handlePhraseCommand = async (message, args) => {
 
     for (const entry of data.slice(0, 3)) {
         const lines = [];
+        const url = `https://jisho.org/word/${entry.slug}`;
 
-        lines.push(`**Expression**: ${entry.slug}`);
+        lines.push(`**Expression**: ${entry.slug} <${url}>`);
 
         if (entry.senses.length === 1) {
             lines.push(`**Meaning**: ${entry.senses[0].english_definitions.join(", ")}`);
@@ -75,7 +76,7 @@ const handleKanjiCommand = async (message, args) => {
     const lines = [];
 
     if (entry.found) {
-        lines.push(`**${kanji}** <${entry.uri}>`);
+        lines.push(`**Kanji**: ${kanji} <${entry.uri}>`);
         if (entry.meaning) {
             lines.push(`**Meaning**: ${entry.meaning}`);
         }
@@ -94,6 +95,9 @@ const handleKanjiCommand = async (message, args) => {
                 line += ` (examples: ${examples})`;
             }
             lines.push(line);
+        }
+        if (entry.parts.length > 0) {
+            lines.push(`**Parts**: ${entry.parts.join(", ")}`);
         }
         if (entry.strokeOrderGifUri) {
             lines.push(`**Stroke order**: ${entry.strokeOrderGifUri}`);
