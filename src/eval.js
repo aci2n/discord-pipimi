@@ -1,10 +1,11 @@
 const ROLE_WHITELIST = new Set(["sudoers"]);
 const COMMAND_PREFIX = "!eval";
 
-const handleEval = (message) => {
+const handleEval = async (message) => {
     if (message.content.startsWith(COMMAND_PREFIX) && hasWhitelistedRole(message.member)) {
         try {
-            const result = eval(message.content);
+            const [, expr] = message.content.split(" ", 2);
+            const result = eval(expr);
             await message.channel.send(result);
         } catch (e) {
             console.error("could not evaluate expression", message);
