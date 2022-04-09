@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from "discord.js";
+import { Message, TextChannel } from "discord.js";
 import JishoAPI from "unofficial-jisho-api";
 
 const JISHO_API = new JishoAPI();
@@ -8,25 +8,32 @@ const JISHO_API = new JishoAPI();
  */
 const handleJishoCommand = message => {
     const { content } = message;
+    // args can be undefined
     const [command, args] = content.split(" ", 2);
 
     switch (command) {
         case "!ji":
         case "!jisho":
-            handlePhraseCommand(message, args);
+            handlePhraseCommand(message.channel, args || "");
             break;
         case "!kanji":
-            handleKanjiCommand(message, args);
+            handleKanjiCommand(message.channel, args || "");
             break;
     }
 };
 
 /**
- * @param {Message} message 
- * @param {string} args 
+ * @param {TextChannel} channel 
+ * @param {string} phrase 
  */
-const handlePhraseCommand = async (message, args) => {
+const handlePhraseCommand = async (channel, args) => {
     const phrase = args.trim();
+
+    if (!phrase) {
+        console.log("ignoring empty phrase search");
+        return;
+    }
+
     const { meta, data } = await JISHO_API.searchForPhrase(phrase);
 
     if (meta.status !== 200) {
@@ -34,7 +41,11 @@ const handlePhraseCommand = async (message, args) => {
         return;
     }
 
-    const results = [];
+    const output = [];
+
+    if (data.length === 0) {
+        output.push(`No results for phrase '${phrase}'.`);
+    }
 
     for (const entry of data.slice(0, 3)) {
         const lines = [];
@@ -56,22 +67,28 @@ const handlePhraseCommand = async (message, args) => {
             lines.push(`**Readings**: ${readings}`);
         }
 
-        results.push(lines.join("\n"));
+        output.push(lines.join("\n"));
     }
 
     try {
-        await message.channel.send(results.join("\n\n"));
+        await channel.send(output.join("\n\n"));
     } catch (e) {
-        console.error("could not send phrase results", results);
+        console.error("could not send phrase results", output);
     }
 };
 
 /**
- * @param {Message} message 
+ * @param {TextChannel} channel 
  * @param {string} args 
  */
-const handleKanjiCommand = async (message, args) => {
+const handleKanjiCommand = async (channel, args) => {
     const kanji = args.trim()[0];
+
+    if (!kanji) {
+        console.log("ignoring empty kanji search");
+        return;
+    }
+
     const entry = await JISHO_API.searchForKanji(kanji);
     const lines = [];
 
@@ -103,11 +120,11 @@ const handleKanjiCommand = async (message, args) => {
             lines.push(`**Stroke order**: ${entry.strokeOrderGifUri}`);
         }
     } else {
-        lines.push(`Did not find ${kanji}`);
+        lines.push(`Did not find kanji '${kanji}'.`);
     }
 
     try {
-        await message.channel.send(lines.join("\n"));
+        await channel.send(lines.join("\n"));
     } catch (e) {
         console.error("could not send kanji result", result);
     }
