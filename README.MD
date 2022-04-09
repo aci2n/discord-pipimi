@@ -1,9 +1,13 @@
 # PIPIMI
 
-## Docker docker
+## Building, pushing and updating remote docker image
 ```sh
-$ docker build -t pipimi .
-$ docker run --env PIPIMI_API_KEY=$PIPIMI_API_KEY pipimi
+$ ./scripts/docker-build.sh
+$ ./scripts/docker-push.sh
+$ ./scripts/docker-pull.sh
+
+# alternatively
+$ ./scripts/docker-install.sh
 ```
 
 ```chunguscript
