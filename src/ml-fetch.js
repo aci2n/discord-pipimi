@@ -1,6 +1,7 @@
 import { argv, exit } from 'process';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
+import { articleEmbed } from './ml-embed.js';
 
 const extractors = [
     {
@@ -66,8 +67,17 @@ const checkUrl = () => {
     }
 };
 
+const handleMeliCommand = message => {
+    const result = fetchArticle(message.content);
+    if (result !== null) {
+        result.then(article => message.channel.send(articleEmbed(message, article)))
+            .then(_ => message.delete({ timeout: 0, reason: "deleted by pipimi" }))
+            .catch(err => console.error(err));
+    }
+};
+
 if (argv[1] === fileURLToPath(import.meta.url)) {
     checkUrl();
 }
 
-export { fetchArticle };
+export { handleMeliCommand };

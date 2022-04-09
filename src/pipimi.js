@@ -1,8 +1,7 @@
 import { Client } from 'discord.js';
 import { env, exit } from 'process';
-import { fetchArticle } from './ml-fetch.js'
-import { articleEmbed } from './ml-embed.js';
-import { processSergeant } from './sergeant.js';
+import { handleMeliCommand } from './ml-fetch.js'
+import { handleSergeantCommand } from './sergeant.js';
 
 const client = new Client();
 const API_KEY_NAME = 'PIPIMI_API_KEY';
@@ -15,17 +14,9 @@ if (!API_KEY) {
 
 client.on('message', message => {
     if (message.author.bot) return;
-    processMeliArticle(message);
-    processSergeant(client, message);
+    handleMeliCommand(message);
+    handleSergeantCommand(message);
 });
 
-const processMeliArticle = message => {
-    const result = fetchArticle(message.content);
-    if (result !== null) {
-        result.then(article => message.channel.send(articleEmbed(message, article)))
-            .then(_ => message.delete({ timeout: 0, reason: "deleted by pipimi" }))
-            .catch(err => console.error(err));
-    }
-};
 
 client.login(API_KEY);

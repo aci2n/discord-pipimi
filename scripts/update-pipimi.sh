@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # this scripts runs in the remote server
 
