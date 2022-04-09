@@ -21,7 +21,7 @@ const handleEval = async (message) => {
             await message.channel.send(result);
         } catch (e) {
             console.error("could not evaluate expression", e);
-            await message.channel.send("Could not evaluate expression");
+            await message.channel.send("Could not evaluate expression: " + JSON.stringify(e));
         }
     }
 };

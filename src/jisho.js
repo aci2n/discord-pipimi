@@ -15,10 +15,10 @@ const handleJishoCommand = async message => {
     switch (command) {
         case "!ji":
         case "!jisho":
-            await handlePhraseCommand(message.channel, args || "");
+            await handlePhraseCommand(message.channel, args);
             break;
         case "!kanji":
-            await handleKanjiCommand(message.channel, args || "");
+            await handleKanjiCommand(message.channel, args);
             break;
     }
 };
