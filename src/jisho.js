@@ -6,7 +6,7 @@ const JISHO_API = new JishoAPI();
 /**
  * @param {Message} message 
  */
-const handleJishoCommand = message => {
+const handleJishoCommand = async message => {
     const { content } = message;
     // args can be undefined
     const [command, args] = content.split(" ", 2);
@@ -14,10 +14,10 @@ const handleJishoCommand = message => {
     switch (command) {
         case "!ji":
         case "!jisho":
-            handlePhraseCommand(message.channel, args || "");
+            await handlePhraseCommand(message.channel, args || "");
             break;
         case "!kanji":
-            handleKanjiCommand(message.channel, args || "");
+            await handleKanjiCommand(message.channel, args || "");
             break;
     }
 };
@@ -70,11 +70,7 @@ const handlePhraseCommand = async (channel, args) => {
         output.push(lines.join("\n"));
     }
 
-    try {
-        await channel.send(output.join("\n\n"));
-    } catch (e) {
-        console.error("could not send phrase results", output);
-    }
+    await channel.send(output.join("\n\n"));
 };
 
 /**
@@ -123,11 +119,7 @@ const handleKanjiCommand = async (channel, args) => {
         lines.push(`Did not find kanji '${kanji}'.`);
     }
 
-    try {
-        await channel.send(lines.join("\n"));
-    } catch (e) {
-        console.error("could not send kanji result", result);
-    }
+    await channel.send(lines.join("\n"));
 };
 
 export { handleJishoCommand };

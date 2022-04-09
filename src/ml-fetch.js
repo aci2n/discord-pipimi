@@ -67,10 +67,10 @@ const checkUrl = () => {
     }
 };
 
-const handleMeliCommand = message => {
+const handleMeliCommand = async message => {
     const result = fetchArticle(message.content);
     if (result !== null) {
-        result.then(article => message.channel.send(articleEmbed(message, article)))
+        await result.then(article => message.channel.send(articleEmbed(message, article)))
             .then(_ => message.delete({ timeout: 0, reason: "deleted by pipimi" }))
             .catch(err => console.error(err));
     }
