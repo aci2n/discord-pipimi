@@ -35,7 +35,7 @@ const handlePhraseCommand = async (message, args) => {
     }
 
     const results = [];
-        
+
     for (const entry of data.slice(0, 3)) {
         const lines = [];
 
@@ -51,7 +51,7 @@ const handlePhraseCommand = async (message, args) => {
         }
 
         if (entry.japanese.length > 0) {
-            const readings = entry.japanese.map(pair => `${pair.word} [${pair.reading}]`).join(", ");
+            const readings = entry.japanese.map(pair => pair.word ? `${pair.word} [${pair.reading}]` : `[${pair.reading}]`).join(", ");
             lines.push(`**Readings**: ${readings}`);
         }
 
@@ -61,7 +61,7 @@ const handlePhraseCommand = async (message, args) => {
     try {
         await message.channel.send(results.join("\n\n"));
     } catch (e) {
-        console.log("could not send phrase results", results);
+        console.error("could not send phrase results", results);
     }
 };
 
@@ -70,11 +70,42 @@ const handlePhraseCommand = async (message, args) => {
  * @param {string} args 
  */
 const handleKanjiCommand = async (message, args) => {
-    const kanjis = args.trim().substring(0, 3);
+    const kanji = args.trim()[0];
+    const entry = await JISHO_API.searchForKanji(kanji);
+    const lines = [];
 
-    for (const kanji of kanjis) {
-        const result = await JISHO_API.searchForKanji(kanji);
-        // message.channel.send(JSON.stringify(result));
+    if (entry.found) {
+        lines.push(`**${kanji}** <${entry.uri}>`);
+        if (entry.meaning) {
+            lines.push(`**Meaning**: ${entry.meaning}`);
+        }
+        if (entry.kunyomi.length > 0) {
+            let line = `**Kunyomi**: ${entry.kunyomi.join(", ")}`;
+            if (entry.kunyomiExamples.length > 0) {
+                const examples = entry.kunyomiExamples.map(def => `${def.example} [${def.reading}]`).join(', ');
+                line += ` (examples: ${examples})`;
+            }
+            lines.push(line);
+        }
+        if (entry.onyomi.length > 0) {
+            let line = `**Onyomi**: ${entry.onyomi.join(", ")}`;
+            if (entry.onyomiExamples.length > 0) {
+                const examples = entry.onyomiExamples.map(def => `${def.example} [${def.reading}]`).join(', ');
+                line += ` (examples: ${examples})`;
+            }
+            lines.push(line);
+        }
+        if (entry.strokeOrderGifUri) {
+            lines.push(`**Stroke order**: ${entry.strokeOrderGifUri}`);
+        }
+    } else {
+        lines.push(`Did not find ${kanji}`);
+    }
+
+    try {
+        await message.channel.send(lines.join("\n"));
+    } catch (e) {
+        console.error("could not send kanji result", result);
     }
 };
 
