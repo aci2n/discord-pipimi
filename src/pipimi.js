@@ -30,7 +30,7 @@ const init = () => {
         if (message.author.bot) {
             return;
         }
-        await PipimiCommand.pipeline(commands, new PipimiContext(message, prefix));
+        await PipimiCommand.execute(commands, new PipimiContext(message, prefix));
     });
     client.login(apiKey);
 };

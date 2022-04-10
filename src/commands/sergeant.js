@@ -1,5 +1,5 @@
 import { GuildMember, VoiceState } from "discord.js";
-import { PipimiCommand, PipimiResponse } from "../framework/command.js";
+import { PipimiCommand } from "../framework/command.js";
 
 /**
  * @returns {PipimiCommand[]}
@@ -13,28 +13,31 @@ const getSergeantCommands = () => {
 
     return [PipimiCommand.standard("carcel", ["Sergeant"], async context => {
         const { message } = context;
+        const { mentions, client, guild, channel } = message;
 
         /** @type {string[]} */
         const movedIds = [];
 
-        for (const user of message.mentions.users.values()) {
-            const member = await new GuildMember(message.client, { user }, message.guild).fetch();
+        for (const user of mentions.users.values()) {
+            const member = await new GuildMember(client, { user }, guild).fetch();
 
             try {
                 if (await moveToChannel(member.voice, jailChannelId)) {
                     movedIds.push(member.id);
                 }
             } catch (e) {
-                return PipimiResponse.error(`Failed to move user '${member.id}'`, e);
+                console.log("Failed to move user", e);
+                await channel.send(`Failed to move user.`);
+                return context;
             }
         }
 
-        if (movedIds.length === 0) {
-            return PipimiResponse.empty();
+        if (movedIds.length > 0) {
+            const customId = movedIds.find(id => customMessages.has(id));
+            await channel.send(customId ? customMessages.get(customId) : "👮");
         }
 
-        const customId = movedIds.find(id => customMessages.has(id));
-        return PipimiResponse.send(customId ? customMessages.get(customId) : "👮");
+        return context;
     })]
 };
 

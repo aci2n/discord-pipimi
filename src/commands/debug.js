@@ -1,4 +1,4 @@
-import { PipimiCommand, PipimiContext, PipimiResponse } from "../framework/command.js";
+import { PipimiCommand, PipimiContext } from "../framework/command.js";
 
 /**
  * @returns {PipimiCommand[]}
@@ -20,7 +20,7 @@ const getDebugCommands = () => {
         // did not find a decent way to avoid modifying the original message
         message.content = args;
 
-        return new PipimiResponse(async () => new PipimiContext(message, context.prefix, debugFunction));
+        return new PipimiContext(message, context.prefix, debugFunction);
     })];
 };
 

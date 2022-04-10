@@ -2,7 +2,7 @@ import { argv, exit } from 'process';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
 import { articleEmbed } from './meli-embed.js';
-import { PipimiCommand, PipimiResponse } from '../framework/command.js';
+import { PipimiCommand } from '../framework/command.js';
 
 const extractors = [
     {
@@ -74,16 +74,22 @@ const checkUrl = () => {
 const getMeliCommands = () => {
     return [new PipimiCommand("meli", async context => {
         const { message } = context;
+        const { channel } = message;
         const articlePromise = fetchArticle(message.content);
 
         if (!articlePromise) {
-            return PipimiResponse.empty();
+            return context;
         }
 
         const article = await articlePromise;
         const embed = articleEmbed(message, article);
 
-        return PipimiResponse.all(PipimiResponse.send(embed), PipimiResponse.delete());
+        await Promise.all([
+            channel.send(embed),
+            message.delete({ timeout: 0, reason: "deleted by pipimi" })
+        ]);
+
+        return context;
     })];
 };
 

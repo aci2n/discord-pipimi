@@ -1,4 +1,4 @@
-import { PipimiCommand, PipimiResponse } from "../framework/command.js";
+import { PipimiCommand } from "../framework/command.js";
 
 /**
  * @returns {PipimiCommand[]}
@@ -7,6 +7,7 @@ const getEvalCommands = () => {
     const delimiter = "```";
 
     return [PipimiCommand.standard("eval", ["sudoers"], async (context, args) => {
+        const { channel } = context.message;
         let expression = args.trim();
 
         if (expression.startsWith(delimiter) && expression.endsWith(delimiter)) {
@@ -14,7 +15,8 @@ const getEvalCommands = () => {
         }
 
         if (!expression) {
-            return PipimiResponse.send("Empty expression.");
+            await channel.send("Empty expression.");
+            return context;
         }
 
         let result;
@@ -24,10 +26,13 @@ const getEvalCommands = () => {
             result = eval(expression);
             context.debug(`Expression evaluated in ${Date.now() - start}ms`);
         } catch (e) {
-            return PipimiResponse.error("Could not evaluate expression", e);
+            console.log("Could not evaluate expression", e);
+            await channel.send("Could not evaluate expression.");
+            return context;
         }
 
-        return PipimiResponse.send(String(result));
+        await channel.send(String(result));
+        return context;
     })];
 };
 

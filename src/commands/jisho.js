@@ -1,5 +1,5 @@
 import JishoAPI from "unofficial-jisho-api";
-import { PipimiCommand, PipimiResponse } from "../framework/command.js";
+import { PipimiCommand, PipimiContext } from "../framework/command.js";
 
 /**
  * @return {PipimiCommand[]}
@@ -8,9 +8,9 @@ const getJishoCommands = () => {
     const api = new JishoAPI();
 
     /** @type {import("../framework/command.js").PrefixCommandHandler} */
-    const phrase = (_, args) => handlePhraseCommand(api, args.trim());
+    const phrase = (context, args) => handlePhraseCommand(context, api, args.trim());
     /** @type {import("../framework/command.js").PrefixCommandHandler} */
-    const kanji = (_, args) => handleKanjiCommand(api, args.trim()[0]);
+    const kanji = (context, args) => handleKanjiCommand(context, api, args.trim()[0]);
 
     return [
         PipimiCommand.standard("ji", [], phrase),
@@ -19,13 +19,17 @@ const getJishoCommands = () => {
 };
 
 /**
+ * @param {PipimiContext} context
  * @param {JishoAPI} api
  * @param {string} phrase 
- * @returns {PipimiResponse}
+ * @returns {Promise<PipimiContext>}
  */
-const handlePhraseCommand = async (api, phrase) => {
+const handlePhraseCommand = async (context, api, phrase) => {
+    const { channel } = context.message;
+
     if (!phrase) {
-        return PipimiResponse.send("Query is empty.");
+        await channel.send("Query is empty.");
+        return context;
     }
 
     /** @type {import("unofficial-jisho-api").JishoAPIResult} */
@@ -33,17 +37,22 @@ const handlePhraseCommand = async (api, phrase) => {
     try {
         apiResponse = await api.searchForPhrase(phrase);
     } catch (e) {
-        return PipimiResponse.error("Jisho API error", e);
+        console.error("Jisho API error", e);
+        await channel.send("Jisho API error.");
+        return context;
     }
 
     const { meta, data } = apiResponse;
 
     if (meta.status !== 200) {
-        return PipimiResponse.error("Got non 200 from API: " + meta.status);
+        console.error("Got non 200 from API", meta.status);
+        await channel.send("Jisho API error.");
+        return context;
     }
 
     if (data.length === 0) {
-        return PipimiResponse.send(`No results for phrase '${phrase}'.`);
+        await channel.send(`No results for phrase '${phrase}'.`);
+        return context;
     }
 
     /** @type {string[]} */
@@ -69,17 +78,22 @@ const handlePhraseCommand = async (api, phrase) => {
         parts.push(lines.join("\n"));
     }
 
-    return PipimiResponse.send(parts.join("\n\n"));
+    await channel.send(parts.join("\n\n"));
+    return context;
 };
 
 /**
+ * @param {PipimiContext} context
  * @param {JishoAPI} api
  * @param {string} kanji 
- * @returns {PipimiResponse}
+ * @returns {Promise<PipimiContext>}
  */
-const handleKanjiCommand = async (api, kanji) => {
+const handleKanjiCommand = async (context, api, kanji) => {
+    const { channel } = context.message;
+
     if (!kanji) {
-        return PipimiResponse.send("Query is empty.");
+        await channel.send("Query is empty.");
+        return context;
     }
 
     /** @type {import("unofficial-jisho-api").KanjiParseResult} */
@@ -87,13 +101,16 @@ const handleKanjiCommand = async (api, kanji) => {
     try {
         apiResponse = await api.searchForKanji(kanji);
     } catch (e) {
-        return PipimiResponse.error("Jisho API error", e);
+        console.log("Jisho API error", e);
+        await channel.send("Jisho API error.");
+        return context;
     }
 
     const entry = apiResponse;
 
     if (!entry.found) {
-        return PipimiResponse.send(`Did not find kanji '${kanji}'.`);
+        await channel.send(`Did not find kanji '${kanji}'.`);
+        return context;
     }
 
     /** @type {string[]} */
@@ -116,7 +133,8 @@ const handleKanjiCommand = async (api, kanji) => {
         parts.push(`**Stroke order**: ${entry.strokeOrderGifUri}`);
     }
 
-    return PipimiResponse.send(parts.join("\n"));
+    await channel.send(parts.join("\n"));
+    return context;
 };
 
 /**
