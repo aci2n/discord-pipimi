@@ -1,10 +1,11 @@
-import { Client, Message } from 'discord.js';
+import { Client } from 'discord.js';
 import { env, exit } from 'process';
 import { getJishoCommands } from './commands/jisho.js';
 import { getMeliCommands } from './commands/meli.js'
 import { getSergeantCommands } from './commands/sergeant.js';
 import { getEvalCommands } from './commands/eval.js';
 import { PipimiCommand, PipimiContext } from './framework/command.js';
+import { getDebugCommands } from './commands/debug.js';
 
 const init = () => {
     const apiKey = env['PIPIMI_API_KEY'];
@@ -16,6 +17,7 @@ const init = () => {
 
     /** @type {PipimiCommand[]} */
     const commands = [
+        ...getDebugCommands(),
         ...getMeliCommands(),
         ...getJishoCommands(),
         ...getSergeantCommands(),
@@ -28,10 +30,7 @@ const init = () => {
         if (message.author.bot) {
             return;
         }
-        const context = new PipimiContext(message, prefix);
-        for (const command of commands) {
-            await command.evaluate(context);
-        }
+        await PipimiCommand.pipeline(commands, new PipimiContext(message, prefix));
     });
     client.login(apiKey);
 };

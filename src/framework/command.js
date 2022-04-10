@@ -20,15 +20,16 @@ class PipimiCommand {
 
     /**
      * @param {PipimiContext} context 
+     * @returns {Promise<PipimiContext>}
      */
     async evaluate(context) {
         const response = await this.execute(context);
         try {
-            await response.handler(context);
+            return await response.callback(context);
         } catch (e) {
             console.error(`Error handling response for command '${this.name}'`, e);
+            return context;
         }
-        return response;
     }
 
     /**
@@ -81,21 +82,32 @@ class PipimiCommand {
             return await handler(context, match[2]);
         });
     }
+
+    /**
+     * @param {PipimiCommand[]} commands 
+     * @returns {Promise<PipimiContext>}
+     */
+    static async pipeline(commands, context) {
+        for (const command of commands) {
+            context = await command.evaluate(context);
+        }
+        return context;
+    }
 }
 
 class PipimiResponse {
     /**
-     * @callback ResponseHandler
+     * @callback ResponseCallback
      * @param {PipimiContext} context
-     * @return {Promise<*>}
+     * @return {Promise<PipimiContext>}
      */
 
     /** 
      * @constructor
-     * @param {ResponseHandler} handler
+     * @param {ResponseCallback} callback
      */
-    constructor(handler) {
-        this.handler = handler;
+    constructor(callback) {
+        this.callback = callback;
     }
 
     /**
@@ -105,6 +117,7 @@ class PipimiResponse {
     static send(message) {
         return new PipimiResponse(async context => {
             await context.message.channel.send(message);
+            return context;
         });
     }
 
@@ -119,6 +132,7 @@ class PipimiResponse {
             const msg = `${message} (${err})`;
             console.error(`Handled error in command ${this.name}`, err);
             await context.message.channel.send(msg);
+            return context;
         });
     }
 
@@ -128,6 +142,7 @@ class PipimiResponse {
     static delete() {
         return new PipimiResponse(async context => {
             await context.message.delete({ timeout: 0, reason: "deleted by pipimi" });
+            return context;
         });
     }
 
@@ -135,7 +150,7 @@ class PipimiResponse {
      * @returns {PipimiResponse}
      */
     static empty() {
-        return new PipimiResponse(async () => { });
+        return new PipimiResponse(async context => context);
     }
 
     /**
@@ -144,20 +159,28 @@ class PipimiResponse {
      */
     static all(...responses) {
         return new PipimiResponse(async context => {
-            await Promise.all(responses.map(response => response.handler(context)));
+            await Promise.all(responses.map(response => response.callback(context)));
+            return context;
         });
     }
 }
 
 class PipimiContext {
     /**
+     * @callback DebugCallback
+     * @param {string} message 
+     */
+
+    /**
      * @constructor
      * @param {Message} message 
      * @param {string} prefix
+     * @param {DebugCallback|null} debug
      */
-    constructor(message, prefix) {
+    constructor(message, prefix, debug) {
         this.message = message;
         this.prefix = prefix;
+        this.debug = debug || (msg => { console.log(msg); });
     }
 }
 

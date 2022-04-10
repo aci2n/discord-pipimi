@@ -6,7 +6,7 @@ import { PipimiCommand, PipimiResponse } from "../framework/command.js";
 const getEvalCommands = () => {
     const delimiter = "```";
 
-    return [PipimiCommand.standard("eval", ["sudoers"], async (_, args) => {
+    return [PipimiCommand.standard("eval", ["sudoers"], async (context, args) => {
         let expression = args.trim();
 
         if (expression.startsWith(delimiter) && expression.endsWith(delimiter)) {
@@ -20,7 +20,9 @@ const getEvalCommands = () => {
         let result;
         try {
             console.log("evaluating javascript", expression);
+            const start = Date.now();
             result = eval(expression);
+            context.debug(`Expression evaluated in ${Date.now() - start}ms`);
         } catch (e) {
             return PipimiResponse.error("Could not evaluate expression", e);
         }
