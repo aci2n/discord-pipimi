@@ -1,4 +1,5 @@
 import { Message, MessageEmbed } from "discord.js";
+import { Utils } from "./utils.js";
 
 class PipimiCommand {
     /**
@@ -57,21 +58,21 @@ class PipimiCommand {
      */
     static standard(prefix, allowedRoles, handler) {
         const allowedRolesSet = new Set(allowedRoles);
+        const regExp = new RegExp(`^(${Utils.escapeRegExp(prefix)})\\s(.*)$`);
 
         return new PipimiCommand(
             prefix,
             async context => {
-                const { message } = context;
-                const { content } = message;
-                const roles = message.member.roles.cache;
+                const match = context.message.content.match(regExp);
+                const roles = context.message.member.roles.cache;
 
-                if (!content.startsWith(prefix)) {
+                if (!match) {
                     return PipimiResponse.empty();
                 }
                 if (allowedRolesSet.size > 0 && !roles.some(role => allowedRolesSet.has(role.name))) {
                     return PipimiResponse.empty();
                 }
-                return await handler(context, context.message.content.substring(prefix.length));
+                return await handler(context, match[2]);
             }
         )
     }
