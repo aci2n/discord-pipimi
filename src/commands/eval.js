@@ -19,7 +19,7 @@ const getEvalCommands = () => {
 
         let result;
         try {
-            console.log("evaluating javascript:", expression);
+            console.log("evaluating javascript", expression);
             result = eval(expression);
         } catch (e) {
             return PipimiResponse.error("Could not evaluate expression", e);

@@ -60,7 +60,7 @@ class PipimiCommand {
 
         return new PipimiCommand(
             prefix,
-            context => {
+            async context => {
                 const { message } = context;
                 const { content } = message;
                 const roles = message.member.roles.cache;
@@ -71,7 +71,7 @@ class PipimiCommand {
                 if (allowedRolesSet.size > 0 && !roles.some(role => allowedRolesSet.has(role.name))) {
                     return PipimiResponse.empty();
                 }
-                return handler(context, context.message.content.substring(prefix.length));
+                return await handler(context, context.message.content.substring(prefix.length));
             }
         )
     }
