@@ -12,7 +12,7 @@ const getSergeantCommands = () => {
     ]);
 
     return [PipimiCommand.standard("carcel", ["Sergeant"], async context => {
-        const { message } = context;
+        const { message, logger } = context;
         const { mentions, client, guild, channel } = message;
 
         /** @type {string[]} */
@@ -22,11 +22,14 @@ const getSergeantCommands = () => {
             const member = await new GuildMember(client, { user }, guild).fetch();
 
             try {
+                logger.trace(() => `About to move user '${member.id}' to jail`);
                 if (await moveToChannel(member.voice, jailChannelId)) {
                     movedIds.push(member.id);
+                } else {
+                    logger.debug(() => `User '${member.id}' was not moved (not in voice or already in jail?)`);
                 }
             } catch (e) {
-                console.log("Failed to move user", e);
+                logger.error(() => `Failed to move user '${member.id}': ${e}`);
                 await channel.send(`Failed to move user.`);
                 return context;
             }
@@ -34,6 +37,7 @@ const getSergeantCommands = () => {
 
         if (movedIds.length > 0) {
             const customId = movedIds.find(id => customMessages.has(id));
+            logger.trace(() => `Sending custom jail message for user '${customId}': '${customMessages.get(id)}'`);
             await channel.send(customId ? customMessages.get(customId) : "👮");
         }
 

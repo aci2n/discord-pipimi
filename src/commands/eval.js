@@ -7,7 +7,8 @@ const getEvalCommands = () => {
     const delimiter = "```";
 
     return [PipimiCommand.standard("eval", ["sudoers"], async (context, args) => {
-        const { channel } = context.message;
+        const { logger, message } = context;
+        const { channel } = message;
         let expression = args.trim();
 
         if (expression.startsWith(delimiter) && expression.endsWith(delimiter)) {
@@ -21,12 +22,12 @@ const getEvalCommands = () => {
 
         let result;
         try {
-            console.log("evaluating javascript", expression);
+            logger.debug(() => "Evaluating javascript: " + expression);
             const start = Date.now();
             result = eval(expression);
-            context.debug(`Expression evaluated in ${Date.now() - start}ms`);
+            logger.debug(`Expression evaluated in ${Date.now() - start}ms`);
         } catch (e) {
-            console.log("Could not evaluate expression", e);
+            logger.error(() => "Could not evaluate expression: " + e);
             await channel.send("Could not evaluate expression.");
             return context;
         }

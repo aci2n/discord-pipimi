@@ -25,7 +25,8 @@ const getJishoCommands = () => {
  * @returns {Promise<PipimiContext>}
  */
 const handlePhraseCommand = async (context, api, phrase) => {
-    const { channel } = context.message;
+    const { message, logger } = context;
+    const { channel } = message;
 
     if (!phrase) {
         await channel.send("Query is empty.");
@@ -37,7 +38,7 @@ const handlePhraseCommand = async (context, api, phrase) => {
     try {
         apiResponse = await api.searchForPhrase(phrase);
     } catch (e) {
-        console.error("Jisho API error", e);
+        logger.error(() => `Jisho API error: ${e}`);
         await channel.send("Jisho API error.");
         return context;
     }
@@ -45,7 +46,7 @@ const handlePhraseCommand = async (context, api, phrase) => {
     const { meta, data } = apiResponse;
 
     if (meta.status !== 200) {
-        console.error("Got non 200 from API", meta.status);
+        logger.error("Got non 200 from API: " + meta.status);
         await channel.send("Jisho API error.");
         return context;
     }
@@ -89,9 +90,11 @@ const handlePhraseCommand = async (context, api, phrase) => {
  * @returns {Promise<PipimiContext>}
  */
 const handleKanjiCommand = async (context, api, kanji) => {
-    const { channel } = context.message;
+    const { message, logger } = context;
+    const { channel } = message;
 
     if (!kanji) {
+        logger.debug("Got empty query");
         await channel.send("Query is empty.");
         return context;
     }
@@ -101,7 +104,7 @@ const handleKanjiCommand = async (context, api, kanji) => {
     try {
         apiResponse = await api.searchForKanji(kanji);
     } catch (e) {
-        console.log("Jisho API error", e);
+        logger.error(() => `Jisho API error: ${e}`);
         await channel.send("Jisho API error.");
         return context;
     }

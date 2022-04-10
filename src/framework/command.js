@@ -1,4 +1,5 @@
-import { Message, MessageEmbed } from "discord.js";
+import { Message } from "discord.js";
+import { PipimiLogger } from "./logger.js";
 import { Utils } from "./utils.js";
 
 class PipimiCommand {
@@ -53,7 +54,6 @@ class PipimiCommand {
                 return context;
             }
 
-            console.log(match);
             return await handler(context, match[2]);
         });
     }
@@ -78,20 +78,15 @@ class PipimiCommand {
 
 class PipimiContext {
     /**
-     * @callback DebugCallback
-     * @param {string} message 
-     */
-
-    /**
      * @constructor
      * @param {Message} message 
      * @param {string} prefix
-     * @param {DebugCallback|null} debug
+     * @param {PipimiLogger} logger
      */
-    constructor(message, prefix, debug) {
+    constructor(message, prefix, logger) {
         this.message = message;
         this.prefix = prefix;
-        this.debug = debug || (msg => { console.log(msg); });
+        this.logger = logger;
     }
 }
 
