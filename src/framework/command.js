@@ -34,7 +34,7 @@ class PipimiCommand {
      */
     static standard(name, allowedRoles, handler) {
         const allowedRolesSet = new Set(allowedRoles);
-        const regExp = new RegExp(`^(${Utils.escapeRegExp(name)})\\s(.*)$`);
+        const regExp = new RegExp(`^(${Utils.escapeRegExp(name)}\\s)`);
 
         return new PipimiCommand(name, async context => {
             const { message, prefix } = context;
@@ -44,7 +44,8 @@ class PipimiCommand {
                 return context;
             }
 
-            const match = content.substring(prefix.length, content.length).match(regExp);
+            const unprefixed = content.substring(prefix.length);
+            const match = unprefixed.match(regExp);
 
             if (!match) {
                 return context;
@@ -54,7 +55,8 @@ class PipimiCommand {
                 return context;
             }
 
-            return await handler(context, match[2]);
+            const args = unprefixed.substring(match[1].length);
+            return await handler(context, args);
         });
     }
 
