@@ -11,7 +11,7 @@ const getSergeantCommands = () => {
         ["94885721948561408", "<:poque:660633228536971265>"]
     ]);
 
-    return [PipimiCommand.standard("!carcel", ["Sergeant"], async context => {
+    return [PipimiCommand.standard("carcel", ["Sergeant"], async context => {
         const { message } = context;
 
         /** @type {string[]} */

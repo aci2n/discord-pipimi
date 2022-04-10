@@ -6,7 +6,7 @@ import { PipimiCommand, PipimiResponse } from "../framework/command.js";
 const getEvalCommands = () => {
     const delimiter = "```";
 
-    return [PipimiCommand.standard("!eval", ["sudoers"], async (_, args) => {
+    return [PipimiCommand.standard("eval", ["sudoers"], async (_, args) => {
         let expression = args.trim();
 
         if (expression.startsWith(delimiter) && expression.endsWith(delimiter)) {

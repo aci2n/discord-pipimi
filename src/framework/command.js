@@ -51,30 +51,35 @@ class PipimiCommand {
      */
 
     /**
-     * @param {string} prefix 
+     * @param {string} name 
      * @param {string[]} allowedRoles 
      * @param {PrefixCommandHandler} handler 
      * @returns {PipimiCommand}
      */
-    static standard(prefix, allowedRoles, handler) {
+    static standard(name, allowedRoles, handler) {
         const allowedRolesSet = new Set(allowedRoles);
-        const regExp = new RegExp(`^(${Utils.escapeRegExp(prefix)})\\s(.*)$`);
+        const regExp = new RegExp(`^(${Utils.escapeRegExp(name)})\\s(.*)$`);
 
-        return new PipimiCommand(
-            prefix,
-            async context => {
-                const match = context.message.content.match(regExp);
-                const roles = context.message.member.roles.cache;
+        return new PipimiCommand(name, async context => {
+            const { message, prefix } = context;
+            const { content, member } = message;
 
-                if (!match) {
-                    return PipimiResponse.empty();
-                }
-                if (allowedRolesSet.size > 0 && !roles.some(role => allowedRolesSet.has(role.name))) {
-                    return PipimiResponse.empty();
-                }
-                return await handler(context, match[2]);
+            if (content.substring(0, prefix.length) != prefix) {
+                return PipimiResponse.empty();
             }
-        )
+
+            const match = content.substring(prefix.length, content.length).match(regExp);
+
+            if (!match) {
+                return PipimiResponse.empty();
+            }
+
+            if (allowedRolesSet.size > 0 && !member.roles.cache.some(role => allowedRolesSet.has(role.name))) {
+                return PipimiResponse.empty();
+            }
+
+            return await handler(context, match[2]);
+        });
     }
 }
 
@@ -148,9 +153,11 @@ class PipimiContext {
     /**
      * @constructor
      * @param {Message} message 
+     * @param {string} prefix
      */
-    constructor(message) {
+    constructor(message, prefix) {
         this.message = message;
+        this.prefix = prefix;
     }
 }
 

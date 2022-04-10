@@ -13,8 +13,8 @@ const getJishoCommands = () => {
     const kanji = (_, args) => handleKanjiCommand(api, args.trim()[0]);
 
     return [
-        PipimiCommand.standard("!ji", [], phrase),
-        PipimiCommand.standard("!kanji", [], kanji)
+        PipimiCommand.standard("ji", [], phrase),
+        PipimiCommand.standard("kanji", [], kanji)
     ];
 };
 
