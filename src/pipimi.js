@@ -3,7 +3,7 @@ import { env, exit } from 'process';
 import { getJishoCommands } from './jisho.js';
 import { handleMeliCommand } from './ml-fetch.js'
 import { getSergeantCommands } from './sergeant.js';
-import { handleEval } from './eval.js';
+import { getEvalCommands } from './eval.js';
 import { PipimiCommand, PipimiContext } from './framework/command.js';
 
 const client = new Client();
@@ -18,7 +18,8 @@ if (!API_KEY) {
 /** @type {PipimiCommand[]} */
 const COMMANDS = [
     ...getJishoCommands(),
-    ...getSergeantCommands()
+    ...getSergeantCommands(),
+    ...getEvalCommands()
 ];
 
 /**
@@ -32,7 +33,6 @@ const messageHandler = async message => {
     // legacy commands
     try {
         await handleMeliCommand(message);
-        await handleEval(message);
     } catch (e) {
         console.error("An error occurred", e, message);
         try {

@@ -1,33 +1,32 @@
-import { Message } from "discord.js";
-
-const ROLE_WHITELIST = new Set(["sudoers"]);
-const COMMAND_PREFIX = "!eval";
+import { PipimiCommand, PipimiResponse } from "./framework/command.js";
 
 /**
- * @param {Message} message 
+ * @returns {PipimiCommand[]}
  */
-const handleEval = async (message) => {
-    if (message.content.startsWith(COMMAND_PREFIX) && hasWhitelistedRole(message.member)) {
-        try {
-            const expr = message.content.substring(COMMAND_PREFIX.length).trim();
+const getEvalCommands = () => {
+    const delimiter = "```";
 
-            if (!expr) {
-                console.log("ignoring eval");
-                return;
-            }
+    return [PipimiCommand.standard("!eval", ["sudoers"], async (_, args) => {
+        let expression = args.trim();
 
-            console.log("evaluating javascript", expr);
-            const result = eval(expr);
-            await message.channel.send(result);
-        } catch (e) {
-            console.error("could not evaluate expression", e);
-            await message.channel.send("Could not evaluate expression: " + JSON.stringify(e));
+        if (expression.startsWith(delimiter) && expression.endsWith(delimiter)) {
+            expression = expression.substring(delimiter.length, expression.length - delimiter.length);
         }
-    }
+
+        if (!expression) {
+            return PipimiResponse.success("Empty expression.");
+        }
+
+        let result;
+        try {
+            console.log("evaluating javascript:", expression);
+            result = eval(expression);
+        } catch (e) {
+            return PipimiResponse.error("Could not evaluate expression", e);
+        }
+
+        return PipimiResponse.success(String(result));
+    })];
 };
 
-const hasWhitelistedRole = member => {
-    return member.roles.cache.find(r => ROLE_WHITELIST.has(r.name));
-}
-
-export { handleEval };
+export { getEvalCommands };
