@@ -22,7 +22,7 @@ const getEvalCommands = () => {
 
         let result;
         try {
-            logger.debug(() => "Evaluating javascript: " + expression);
+            logger.debug(() => `Evaluating javascript \`\`\`${expression}\`\`\``);
             const start = Date.now();
             result = eval(expression);
             const elapsed = Date.now() - start;
