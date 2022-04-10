@@ -1,127 +1,161 @@
-import { Message, TextChannel } from "discord.js";
 import JishoAPI from "unofficial-jisho-api";
-
-const JISHO_API = new JishoAPI();
-const COMMANDS = [
-    { prefixes: ["!ji", "!jisho"], handler: (channel, message) => handlePhraseCommand(channel, message) },
-    { prefixes: ["!kanji"], handler: (channel, message) => handleKanjiCommand(channel, message) }
-]
+import { PipimiCommand, PipimiResponse } from "./framework/command.js";
 
 /**
- * @param {Message} message 
+ * @return {PipimiCommand[]}
  */
-const handleJishoCommand = async message => {
-    const { content } = message;
+const getJishoCommands = () => {
+    const api = new JishoAPI();
 
-    for (const command of COMMANDS) {
-        for (const prefix of command.prefixes) {
-            if (content.startsWith(prefix)) {
-                const args = content.substring(prefix.length);
-                await command.handler(message.channel, args);
-                return;
-            }
-        }
-    }
+    /** @type {import("./framework/command.js").PrefixCommandHandler} */
+    const phrase = (_, args) => handlePhraseCommand(api, args.trim());
+    /** @type {import("./framework/command.js").PrefixCommandHandler} */
+    const kanji = (_, args) => handleKanjiCommand(api, args.trim()[0]);
+
+    return [
+        PipimiCommand.standard("!ji", new Set(), phrase),
+        PipimiCommand.standard("!kanji", new Set(), kanji)
+    ];
 };
 
 /**
- * @param {TextChannel} channel 
+ * @param {JishoAPI} api
  * @param {string} phrase 
+ * @returns {PipimiResponse}
  */
-const handlePhraseCommand = async (channel, args) => {
-    const phrase = args.trim();
-
+const handlePhraseCommand = async (api, phrase) => {
     if (!phrase) {
-        console.log("ignoring empty phrase search");
-        return;
+        return PipimiResponse.success("Query is empty.");
     }
 
-    const { meta, data } = await JISHO_API.searchForPhrase(phrase);
+    /** @type {import("unofficial-jisho-api").JishoAPIResult} */
+    let apiResponse;
+    try {
+        apiResponse = await api.searchForPhrase(phrase);
+    } catch (e) {
+        return PipimiResponse.error(new Error("Jisho API error: " + JSON.stringify(e)));
+    }
+
+    const { meta, data } = apiResponse;
 
     if (meta.status !== 200) {
-        console.error("got non-200 from jisho api", meta.status);
-        return;
+        return PipimiResponse.error(new Error("Got non 200 from API: " + meta.status));
     }
-
-    const output = [];
 
     if (data.length === 0) {
-        output.push(`No results for phrase '${phrase}'.`);
+        return PipimiResponse.success(`No results for phrase '${phrase}'.`);
     }
 
-    for (const entry of data.slice(0, 3)) {
+    /** @type {string[]} */
+    const parts = [];
+
+    for (const match of data.slice(0, 3)) {
         const lines = [];
-        const url = `https://jisho.org/word/${entry.slug}`;
+        const url = `https://jisho.org/word/${match.slug}`;
+        const readings = readingPairs(match.japanese);
 
-        lines.push(`**Expression**: ${entry.slug} <${url}>`);
-
-        if (entry.senses.length === 1) {
-            lines.push(`**Meaning**: ${entry.senses[0].english_definitions.join(", ")}`);
-        } else if (entry.senses.length > 1) {
+        lines.push(`**Expression**: ${match.slug} <${url}>`);
+        if (match.senses.length === 1) {
+            lines.push(`**Meaning**: ${commaJoin(match.senses[0].english_definitions)}`);
+        } else if (match.senses.length > 1) {
             lines.push("**Meanings**:")
-            for (const sense of entry.senses) {
-                lines.push(`- ${sense.english_definitions.join(", ")}`);
+            for (const sense of match.senses) {
+                lines.push(`- ${commaJoin(sense.english_definitions)}`);
             }
         }
-
-        if (entry.japanese.length > 0) {
-            const readings = entry.japanese.map(pair => pair.word ? `${pair.word} [${pair.reading}]` : `[${pair.reading}]`).join(", ");
-            lines.push(`**Readings**: ${readings}`);
+        if (readings.length > 0) {
+            lines.push(`**Readings**: ${commaJoin(readings)}`);
         }
-
-        output.push(lines.join("\n"));
+        parts.push(lines.join("\n"));
     }
 
-    await channel.send(output.join("\n\n"));
+    return PipimiResponse.success(parts.join("\n\n"));
 };
 
 /**
- * @param {TextChannel} channel 
- * @param {string} args 
+ * @param {JishoAPI} api
+ * @param {string} kanji 
+ * @returns {PipimiResponse}
  */
-const handleKanjiCommand = async (channel, args) => {
-    const kanji = args.trim()[0];
-
+const handleKanjiCommand = async (api, kanji) => {
     if (!kanji) {
-        console.log("ignoring empty kanji search");
-        return;
+        return PipimiResponse.success("Query is empty.");
     }
 
-    const entry = await JISHO_API.searchForKanji(kanji);
-    const lines = [];
-
-    if (entry.found) {
-        lines.push(`**Kanji**: ${kanji} <${entry.uri}>`);
-        if (entry.meaning) {
-            lines.push(`**Meaning**: ${entry.meaning}`);
-        }
-        if (entry.kunyomi.length > 0) {
-            let line = `**Kunyomi**: ${entry.kunyomi.join(", ")}`;
-            if (entry.kunyomiExamples.length > 0) {
-                const examples = entry.kunyomiExamples.map(def => `${def.example} [${def.reading}]`).join(', ');
-                line += ` (examples: ${examples})`;
-            }
-            lines.push(line);
-        }
-        if (entry.onyomi.length > 0) {
-            let line = `**Onyomi**: ${entry.onyomi.join(", ")}`;
-            if (entry.onyomiExamples.length > 0) {
-                const examples = entry.onyomiExamples.map(def => `${def.example} [${def.reading}]`).join(', ');
-                line += ` (examples: ${examples})`;
-            }
-            lines.push(line);
-        }
-        if (entry.parts.length > 0) {
-            lines.push(`**Parts**: ${entry.parts.join(", ")}`);
-        }
-        if (entry.strokeOrderGifUri) {
-            lines.push(`**Stroke order**: ${entry.strokeOrderGifUri}`);
-        }
-    } else {
-        lines.push(`Did not find kanji '${kanji}'.`);
+    /** @type {import("unofficial-jisho-api").KanjiParseResult} */
+    let apiResponse;
+    try {
+        apiResponse = await api.searchForKanji(kanji);
+    } catch (e) {
+        return PipimiResponse.error(new Error("Jisho API error: " + JSON.stringify(e)));
     }
 
-    await channel.send(lines.join("\n"));
+    const entry = apiResponse;
+
+    if (!entry.found) {
+        return PipimiResponse.success(`Did not find kanji '${kanji}'.`);
+    }
+
+    /** @type {string[]} */
+    const parts = [];
+
+    parts.push(`**Kanji**: ${kanji} <${entry.uri}>`);
+    if (entry.meaning) {
+        parts.push(`**Meaning**: ${entry.meaning}`);
+    }
+    if (entry.kunyomi.length > 0) {
+        parts.push(readingsWithExamples("Kunyomi", entry.kunyomi, entry.kunyomiExamples));
+    }
+    if (entry.onyomi.length > 0) {
+        parts.push(readingsWithExamples("Onyomi", entry.onyomi, entry.onyomiExamples));
+    }
+    if (entry.parts.length > 0) {
+        parts.push(`**Parts**: ${commaJoin(entry.parts)}`);
+    }
+    if (entry.strokeOrderGifUri) {
+        parts.push(`**Stroke order**: ${entry.strokeOrderGifUri}`);
+    }
+
+    return PipimiResponse.success(parts.join("\n"));
 };
 
-export { handleJishoCommand };
+/**
+ * @param {string} name 
+ * @param {string[]} readings 
+ * @param {{example: string|null, reading: string|null}[]} examples
+ * @returns {string}
+ */
+const readingsWithExamples = (name, readings, examples) => {
+    let line = `**${name}**: ${commaJoin(readings)}`;
+    const exampleReadings = readingPairs(examples.map(def => ({ word: def.example, reading: def.reading })));
+    if (exampleReadings.length > 0) {
+        line += ` (examples: ${commaJoin(exampleReadings)})`;
+    }
+    return line;
+}
+
+/**
+ * @param {{word: string|null, reading: string|null}[]} pairs
+ * @returns {string[]}
+ */
+const readingPairs = pairs => {
+    return pairs
+        .map(({ word, reading }) => {
+            /** @type {string[]} */
+            const tokens = [];
+            if (word) tokens.push(word);
+            if (reading) tokens.push(`[${reading}]`);
+            return tokens.join(' ');
+        })
+        .filter(result => result);
+};
+
+/**
+ * @param {string[]} parts 
+ * @returns {string}
+ */
+const commaJoin = parts => {
+    return parts.join(", ");
+};
+
+export { getJishoCommands };
