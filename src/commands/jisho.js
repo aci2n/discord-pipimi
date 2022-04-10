@@ -46,7 +46,7 @@ const handlePhraseCommand = async (context, api, phrase) => {
     const { meta, data } = apiResponse;
 
     if (meta.status !== 200) {
-        logger.error("Got non 200 from API: " + meta.status);
+        logger.error(() => "Got non 200 from API: " + meta.status);
         await channel.send("Jisho API error.");
         return context;
     }
@@ -94,7 +94,7 @@ const handleKanjiCommand = async (context, api, kanji) => {
     const { channel } = message;
 
     if (!kanji) {
-        logger.debug("Got empty query");
+        logger.debug(() => "Got empty query");
         await channel.send("Query is empty.");
         return context;
     }

@@ -6,7 +6,7 @@ import { getSergeantCommands } from './commands/sergeant.js';
 import { getEvalCommands } from './commands/eval.js';
 import { PipimiCommand, PipimiContext } from './framework/command.js';
 import { getDebugCommands } from './commands/debug.js';
-import { ConsoleLogger, GranularityLogger } from './framework/logger.js';
+import { ConsoleLogger, LogLevel, PriorityLogger } from './framework/logger.js';
 
 const init = () => {
     const apiKey = env['PIPIMI_API_KEY'];
@@ -26,7 +26,7 @@ const init = () => {
     ];
     const prefix = env['PIPIMI_PREFIX'] || "!";
     const client = new Client();
-    const logger = new GranularityLogger(GranularityLogger.DEBUG, new ConsoleLogger());
+    const logger = new PriorityLogger(LogLevel.LEVELS.DEBUG, new ConsoleLogger());
 
     client.on('message', async message => {
         if (message.author.bot) {

@@ -37,7 +37,9 @@ const getSergeantCommands = () => {
 
         if (movedIds.length > 0) {
             const customId = movedIds.find(id => customMessages.has(id));
-            logger.trace(() => `Sending custom jail message for user '${customId}': '${customMessages.get(id)}'`);
+            if (customId) {
+                logger.trace(() => `Sending custom jail message for user '${customId}': '${customMessages.get(customId)}'`);
+            }
             await channel.send(customId ? customMessages.get(customId) : "👮");
         }
 

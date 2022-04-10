@@ -25,7 +25,8 @@ const getEvalCommands = () => {
             logger.debug(() => "Evaluating javascript: " + expression);
             const start = Date.now();
             result = eval(expression);
-            logger.debug(`Expression evaluated in ${Date.now() - start}ms`);
+            const elapsed = Date.now() - start;
+            logger.debug(() => `Expression evaluated in ${elapsed}ms`);
         } catch (e) {
             logger.error(() => "Could not evaluate expression: " + e);
             await channel.send("Could not evaluate expression.");
