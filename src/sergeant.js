@@ -1,61 +1,53 @@
-import { GuildMember, Message, TextChannel } from "discord.js";
-
-const ROLE_WHITELIST = new Set(["Sergeant"]);
-const JAIL_CHANNEL_ID = "885247701019676732";
-const COMMAND_PREFIX = "!carcel";
-const PERSONALIZED_MESSAGES = new Map([
-    ["957017010129235989", "adios mosca"],
-    ["94885721948561408", "<:poque:660633228536971265>"]
-]);
+import { GuildMember, VoiceState } from "discord.js";
+import { PipimiCommand, PipimiResponse } from "./framework/command.js";
 
 /**
- * @param {Message} message 
+ * @returns {PipimiCommand[]}
  */
-const handleSergeantCommand = async message => {
-    if (message.content.startsWith(COMMAND_PREFIX) && hasWhitelistedRole(message.member)) {
+const getSergeantCommands = () => {
+    const jailChannelId = "885247701019676732";
+    const customMessages = new Map([
+        ["957017010129235989", "adios mosca"],
+        ["94885721948561408", "<:poque:660633228536971265>"]
+    ]);
+
+    return [PipimiCommand.standard("!carcel", ["Sergeant"], async context => {
+        const { message } = context;
+
+        /** @type {string[]} */
+        const movedIds = [];
+
         for (const user of message.mentions.users.values()) {
             const member = await new GuildMember(message.client, { user }, message.guild).fetch();
-            await moveToJail(member.id, member.voice, message.channel);
+
+            try {
+                if (await moveToChannel(member.voice, jailChannelId)) {
+                    movedIds.push(member.id);
+                }
+            } catch (e) {
+                return PipimiResponse.error(`Failed to move user '${member.id}'`, e);
+            }
         }
-    }
+
+        if (movedIds.length === 0) {
+            return PipimiResponse.empty();
+        }
+
+        const customId = movedIds.find(id => customMessages.has(id));
+        return PipimiResponse.success(customId ? customMessages.get(customId) : "👮");
+    })]
 };
 
 /**
- * @param {Snowflake} memberId
  * @param {VoiceState} voiceState
- * @param {TextChannel} textChannel
+ * @param {string} channelId
  */
-const moveToJail = async (memberId, voiceState, textChannel) => {
-    if (!voiceState.channelID || voiceState.channelID === JAIL_CHANNEL_ID) {
-        console.log("ignoring jail command", memberId);
-        return;
+const moveToChannel = async (voiceState, channelId) => {
+    if (!voiceState.channelID || voiceState.channelID === channelId) {
+        return false;
     }
-
-    console.log("sending user to jail", memberId);
-
-    try {
-        await voiceState.setChannel(JAIL_CHANNEL_ID);
-    } catch (e) {
-        console.error("failed to send user to jail", memberId, e)
-        return;
-    }
-
-    const message = PERSONALIZED_MESSAGES.has(memberId)
-        ? PERSONALIZED_MESSAGES.get(memberId)
-        : "👮";
-
-    try {
-        await textChannel.send(message);
-    } catch (e) {
-        console.error("could not send message", memberId, e);
-    }
+    await voiceState.setChannel(channelId);
+    return true;
 };
 
-/**
- * @param {GuildMember} member 
- */
-const hasWhitelistedRole = member => {
-    return member.roles.cache.find(r => ROLE_WHITELIST.has(r.name));
-}
-
-export { handleSergeantCommand };
+export { getSergeantCommands };

@@ -2,7 +2,7 @@ import { Client, Message } from 'discord.js';
 import { env, exit } from 'process';
 import { getJishoCommands } from './jisho.js';
 import { handleMeliCommand } from './ml-fetch.js'
-import { handleSergeantCommand } from './sergeant.js';
+import { getSergeantCommands } from './sergeant.js';
 import { handleEval } from './eval.js';
 import { PipimiCommand, PipimiContext } from './framework/command.js';
 
@@ -17,7 +17,8 @@ if (!API_KEY) {
 
 /** @type {PipimiCommand[]} */
 const COMMANDS = [
-    ...getJishoCommands()
+    ...getJishoCommands(),
+    ...getSergeantCommands()
 ];
 
 /**
@@ -31,7 +32,6 @@ const messageHandler = async message => {
     // legacy commands
     try {
         await handleMeliCommand(message);
-        await handleSergeantCommand(message);
         await handleEval(message);
     } catch (e) {
         console.error("An error occurred", e, message);

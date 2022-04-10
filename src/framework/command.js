@@ -44,31 +44,48 @@ class PipimiCommand {
         return response;
     }
 
+    /**
+     * @param {PipimiContext} context 
+     * @returns {Promise<PipimiResponse>}
+     */
     async execute(context) {
         if (this.filter(context)) {
             try {
                 return await this.handler(context);
             } catch (e) {
-                return PipimiResponse.error(new Error(`Uncaught error in command '${this.name}': ` + JSON.stringify(e)));
+                return PipimiResponse.error(`Uncaught error in command '${this.name}'`, e);
             }
         }
-        return PipimiResponse.noop();
+        return PipimiResponse.empty();
     }
 
     /**
      * @param {string} prefix 
-     * @param {Set<string>} roles 
+     * @param {string[]} allowedRoles 
      * @param {PrefixCommandHandler} handler 
      * @returns {PipimiCommand}
      */
-    static standard(prefix, roles, handler) {
+    static standard(prefix, allowedRoles, handler) {
+        const allowedRolesSet = new Set(allowedRoles);
+
         return new PipimiCommand(
             prefix,
-            context => 
-                context.message.content.startsWith(prefix) &&
-                (roles.size === 0 || context.message.member.roles.cache.some(role => roles.has(role))),
-            context =>
-                handler(context, context.message.content.substring(prefix.length))
+            context => {
+                const { message } = context;
+                const { content } = message;
+                const roles = message.member.roles.cache;
+
+                if (!content.startsWith(prefix)) {
+                    return false;
+                }
+                if (allowedRolesSet.size === 0) {
+                    return true;
+                }
+                return roles.some(role => allowedRolesSet.has(role.name));
+            },
+            context => {
+                return handler(context, context.message.content.substring(prefix.length))
+            }
         )
     }
 }
@@ -110,18 +127,28 @@ class PipimiResponse {
     }
 
     /**
-     * @param {Error} error
+     * @param {string} message
+     * @param {Error|null} error
      * @returns {PipimiResponse}
      */
-    static error(error) {
-        return new PipimiResponse(error.message, error, []);
+    static error(message, error) {
+        error = error || new Error();
+        return new PipimiResponse(message + ` (${error})`, error, []);
     }
 
     /**
      * @returns {PipimiResponse}
      */
-    static noop() {
+    static empty() {
         return new PipimiResponse(null, null, []);
+    }
+
+    /**
+     * @param {...PipimiResponse} responses
+     * @returns {PipimiResponse}
+     */
+    static compose(...responses) {
+        return new PipimiResponse(null, null, responses);
     }
 }
 

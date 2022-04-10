@@ -13,8 +13,8 @@ const getJishoCommands = () => {
     const kanji = (_, args) => handleKanjiCommand(api, args.trim()[0]);
 
     return [
-        PipimiCommand.standard("!ji", new Set(), phrase),
-        PipimiCommand.standard("!kanji", new Set(), kanji)
+        PipimiCommand.standard("!ji", [], phrase),
+        PipimiCommand.standard("!kanji", [], kanji)
     ];
 };
 
@@ -33,13 +33,13 @@ const handlePhraseCommand = async (api, phrase) => {
     try {
         apiResponse = await api.searchForPhrase(phrase);
     } catch (e) {
-        return PipimiResponse.error(new Error("Jisho API error: " + JSON.stringify(e)));
+        return PipimiResponse.error("Jisho API error", e);
     }
 
     const { meta, data } = apiResponse;
 
     if (meta.status !== 200) {
-        return PipimiResponse.error(new Error("Got non 200 from API: " + meta.status));
+        return PipimiResponse.error("Got non 200 from API: " + meta.status);
     }
 
     if (data.length === 0) {
@@ -87,7 +87,7 @@ const handleKanjiCommand = async (api, kanji) => {
     try {
         apiResponse = await api.searchForKanji(kanji);
     } catch (e) {
-        return PipimiResponse.error(new Error("Jisho API error: " + JSON.stringify(e)));
+        return PipimiResponse.error("Jisho API error", e);
     }
 
     const entry = apiResponse;
