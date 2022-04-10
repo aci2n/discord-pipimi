@@ -23,9 +23,9 @@ class PipimiCommand {
     async evaluate(context) {
         const response = await this.execute(context);
         try {
-            await response.callback(context);
+            await response.handler(context);
         } catch (e) {
-            console.error(`Error writing response for command '${this.name}'`, e);
+            console.error(`Error handling response for command '${this.name}'`, e);
         }
         return response;
     }
@@ -79,17 +79,17 @@ class PipimiCommand {
 
 class PipimiResponse {
     /**
-     * @callback ResponseCallback
+     * @callback ResponseHandler
      * @param {PipimiContext} context
      * @return {Promise<*>}
      */
 
     /** 
      * @constructor
-     * @param {ResponseCallback} callback
+     * @param {ResponseHandler} handler
      */
-    constructor(callback) {
-        this.callback = callback;
+    constructor(handler) {
+        this.handler = handler;
     }
 
     /**
@@ -136,11 +136,9 @@ class PipimiResponse {
      * @param {...PipimiResponse} responses
      * @returns {PipimiResponse}
      */
-    static compose(...responses) {
+    static all(...responses) {
         return new PipimiResponse(async context => {
-            for (const response of responses) {
-                await response.callback(context);
-            }
+            await Promise.all(responses.map(response => response.handler(context)));
         });
     }
 }

@@ -83,9 +83,7 @@ const getMeliCommands = () => {
         const article = await articlePromise;
         const embed = articleEmbed(message, article);
 
-        return PipimiResponse.compose(
-            PipimiResponse.send(embed),
-            PipimiResponse.delete());
+        return PipimiResponse.all(PipimiResponse.send(embed), PipimiResponse.delete());
     })];
 };
 
