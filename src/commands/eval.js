@@ -1,4 +1,4 @@
-import { PipimiCommand, PipimiResponse } from "./framework/command.js";
+import { PipimiCommand, PipimiResponse } from "../framework/command.js";
 
 /**
  * @returns {PipimiCommand[]}

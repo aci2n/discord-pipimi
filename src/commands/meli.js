@@ -1,8 +1,8 @@
 import { argv, exit } from 'process';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
-import { articleEmbed } from './ml-embed.js';
-import { PipimiCommand, PipimiResponse } from './framework/command.js';
+import { articleEmbed } from './meli-embed.js';
+import { PipimiCommand, PipimiResponse } from '../framework/command.js';
 
 const extractors = [
     {
@@ -72,7 +72,7 @@ const checkUrl = () => {
  * @type {PipimiCommand[]}
  */
 const getMeliCommands = () => {
-    return [new PipimiCommand("ml", async context => {
+    return [new PipimiCommand("meli", async context => {
         const { message } = context;
         const articlePromise = fetchArticle(message.content);
 

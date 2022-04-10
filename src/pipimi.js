@@ -1,9 +1,9 @@
 import { Client, Message } from 'discord.js';
 import { env, exit } from 'process';
-import { getJishoCommands } from './jisho.js';
-import { getMeliCommands } from './ml-fetch.js'
-import { getSergeantCommands } from './sergeant.js';
-import { getEvalCommands } from './eval.js';
+import { getJishoCommands } from './commands/jisho.js';
+import { getMeliCommands } from './commands/meli.js'
+import { getSergeantCommands } from './commands/sergeant.js';
+import { getEvalCommands } from './commands/eval.js';
 import { PipimiCommand, PipimiContext } from './framework/command.js';
 
 const client = new Client();

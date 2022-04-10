@@ -1,5 +1,5 @@
 import JishoAPI from "unofficial-jisho-api";
-import { PipimiCommand, PipimiResponse } from "./framework/command.js";
+import { PipimiCommand, PipimiResponse } from "../framework/command.js";
 
 /**
  * @return {PipimiCommand[]}
@@ -7,9 +7,9 @@ import { PipimiCommand, PipimiResponse } from "./framework/command.js";
 const getJishoCommands = () => {
     const api = new JishoAPI();
 
-    /** @type {import("./framework/command.js").PrefixCommandHandler} */
+    /** @type {import("../framework/command.js").PrefixCommandHandler} */
     const phrase = (_, args) => handlePhraseCommand(api, args.trim());
-    /** @type {import("./framework/command.js").PrefixCommandHandler} */
+    /** @type {import("../framework/command.js").PrefixCommandHandler} */
     const kanji = (_, args) => handleKanjiCommand(api, args.trim()[0]);
 
     return [
