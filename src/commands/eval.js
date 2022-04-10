@@ -6,7 +6,7 @@ import { PipimiCommand } from "../framework/command.js";
 const getEvalCommands = () => {
     const delimiter = "```";
 
-    return [PipimiCommand.standard("eval", ["sudoers"], async (context, args) => {
+    return [PipimiCommand.standard("eval", ["sudoers", "hackerman"], async (context, args) => {
         const { logger, message } = context;
         const { channel } = message;
         let expression = args.trim();
