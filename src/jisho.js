@@ -25,7 +25,7 @@ const getJishoCommands = () => {
  */
 const handlePhraseCommand = async (api, phrase) => {
     if (!phrase) {
-        return PipimiResponse.success("Query is empty.");
+        return PipimiResponse.send("Query is empty.");
     }
 
     /** @type {import("unofficial-jisho-api").JishoAPIResult} */
@@ -43,7 +43,7 @@ const handlePhraseCommand = async (api, phrase) => {
     }
 
     if (data.length === 0) {
-        return PipimiResponse.success(`No results for phrase '${phrase}'.`);
+        return PipimiResponse.send(`No results for phrase '${phrase}'.`);
     }
 
     /** @type {string[]} */
@@ -69,7 +69,7 @@ const handlePhraseCommand = async (api, phrase) => {
         parts.push(lines.join("\n"));
     }
 
-    return PipimiResponse.success(parts.join("\n\n"));
+    return PipimiResponse.send(parts.join("\n\n"));
 };
 
 /**
@@ -79,7 +79,7 @@ const handlePhraseCommand = async (api, phrase) => {
  */
 const handleKanjiCommand = async (api, kanji) => {
     if (!kanji) {
-        return PipimiResponse.success("Query is empty.");
+        return PipimiResponse.send("Query is empty.");
     }
 
     /** @type {import("unofficial-jisho-api").KanjiParseResult} */
@@ -93,7 +93,7 @@ const handleKanjiCommand = async (api, kanji) => {
     const entry = apiResponse;
 
     if (!entry.found) {
-        return PipimiResponse.success(`Did not find kanji '${kanji}'.`);
+        return PipimiResponse.send(`Did not find kanji '${kanji}'.`);
     }
 
     /** @type {string[]} */
@@ -116,7 +116,7 @@ const handleKanjiCommand = async (api, kanji) => {
         parts.push(`**Stroke order**: ${entry.strokeOrderGifUri}`);
     }
 
-    return PipimiResponse.success(parts.join("\n"));
+    return PipimiResponse.send(parts.join("\n"));
 };
 
 /**

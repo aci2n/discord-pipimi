@@ -1,9 +1,14 @@
-import { MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed } from 'discord.js';
 
 const MAX_FIELDS = 6;
 const MAX_DESCRIPTION_LENGTH = 300;
 const MAX_FIELD_LENGTH = 30;
 
+/**
+ * @param {Message} message 
+ * @param {object} article 
+ * @returns {MessageEmbed}
+ */
 function articleEmbed(message, article) {
     const { item, description } = article;
     console.log('creating embed', item.id);

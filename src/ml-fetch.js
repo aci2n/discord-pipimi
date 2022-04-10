@@ -2,6 +2,7 @@ import { argv, exit } from 'process';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
 import { articleEmbed } from './ml-embed.js';
+import { PipimiCommand, PipimiResponse } from './framework/command.js';
 
 const extractors = [
     {
@@ -67,17 +68,29 @@ const checkUrl = () => {
     }
 };
 
-const handleMeliCommand = async message => {
-    const result = fetchArticle(message.content);
-    if (result !== null) {
-        await result.then(article => message.channel.send(articleEmbed(message, article)))
-            .then(_ => message.delete({ timeout: 0, reason: "deleted by pipimi" }))
-            .catch(err => console.error(err));
-    }
+/**
+ * @type {PipimiCommand[]}
+ */
+const getMeliCommands = () => {
+    return [new PipimiCommand("ml", async context => {
+        const { message } = context;
+        const articlePromise = fetchArticle(message.content);
+
+        if (!articlePromise) {
+            return PipimiResponse.empty();
+        }
+
+        const article = await articlePromise;
+        const embed = articleEmbed(message, article);
+
+        return PipimiResponse.compose(
+            PipimiResponse.send(embed),
+            PipimiResponse.delete());
+    })];
 };
 
 if (argv[1] === fileURLToPath(import.meta.url)) {
     checkUrl();
 }
 
-export { handleMeliCommand };
+export { getMeliCommands };

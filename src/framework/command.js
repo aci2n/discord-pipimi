@@ -1,33 +1,19 @@
-import { Message } from "discord.js";
-
-/**
- * @callback CommandFilter
- * @param {PipimiContext} context
- */
-
-/**
- * @callback CommandHandler
- * @param {PipimiContext} context
- * @return {Promise<PipimiResponse>}
- */
-
-/**
- * @callback PrefixCommandHandler
- * @param {PipimiContext} context
- * @param {string} args 
- * @return {Promise<PipimiResponse>}
- */
+import { Message, MessageEmbed } from "discord.js";
 
 class PipimiCommand {
     /**
+     * @callback CommandHandler
+     * @param {PipimiContext} context
+     * @return {Promise<PipimiResponse>}
+     */
+
+    /**
      * @constructor
      * @param {string} name
-     * @param {CommandFilter} filter 
      * @param {CommandHandler} handler 
      */
-    constructor(name, filter, handler) {
+    constructor(name, handler) {
         this.name = name;
-        this.filter = filter;
         this.handler = handler;
     }
 
@@ -37,7 +23,7 @@ class PipimiCommand {
     async evaluate(context) {
         const response = await this.execute(context);
         try {
-            await response.write(context);
+            await response.callback(context);
         } catch (e) {
             console.error(`Error writing response for command '${this.name}'`, e);
         }
@@ -49,15 +35,19 @@ class PipimiCommand {
      * @returns {Promise<PipimiResponse>}
      */
     async execute(context) {
-        if (this.filter(context)) {
-            try {
-                return await this.handler(context);
-            } catch (e) {
-                return PipimiResponse.error(`Uncaught error in command '${this.name}'`, e);
-            }
+        try {
+            return await this.handler(context);
+        } catch (e) {
+            return PipimiResponse.error(`Uncaught error in command '${this.name}'`, e);
         }
-        return PipimiResponse.empty();
     }
+
+    /**
+     * @callback PrefixCommandHandler
+     * @param {PipimiContext} context
+     * @param {string} args 
+     * @return {Promise<PipimiResponse>}
+     */
 
     /**
      * @param {string} prefix 
@@ -76,54 +66,40 @@ class PipimiCommand {
                 const roles = message.member.roles.cache;
 
                 if (!content.startsWith(prefix)) {
-                    return false;
+                    return PipimiResponse.empty();
                 }
-                if (allowedRolesSet.size === 0) {
-                    return true;
+                if (allowedRolesSet.size > 0 && !roles.some(role => allowedRolesSet.has(role.name))) {
+                    return PipimiResponse.empty();
                 }
-                return roles.some(role => allowedRolesSet.has(role.name));
-            },
-            context => {
-                return handler(context, context.message.content.substring(prefix.length))
+                return handler(context, context.message.content.substring(prefix.length));
             }
         )
     }
 }
 
 class PipimiResponse {
+    /**
+     * @callback ResponseCallback
+     * @param {PipimiContext} context
+     * @return {Promise<*>}
+     */
+
     /** 
      * @constructor
-     * @param {string|null} message
-     * @param {Error|null} error
-     * @param {PipimiResponse[]} children
+     * @param {ResponseCallback} callback
      */
-    constructor(message, error, children) {
-        this.message = message;
-        this.error = error;
-        this.children = children;
+    constructor(callback) {
+        this.callback = callback;
     }
 
     /**
-     * @param {PipimiContext} context
-     */
-    async write(context) {
-        if (this.error) {
-            console.log(`Handled error inside command ${this.name}`, this.error);
-        }
-        if (this.message) {
-            await context.message.channel.send(this.message);
-        }
-        for (const child of this.children) {
-            await child.write(context);
-        }
-    }
-
-    /**
-     * @param  {string} message 
+     * @param  {string|MessageEmbed} message 
      * @returns {PipimiResponse}
      */
-    static success(message) {
-        return new PipimiResponse(message, null, []);
+    static send(message) {
+        return new PipimiResponse(async context => {
+            await context.message.channel.send(message);
+        });
     }
 
     /**
@@ -132,15 +108,28 @@ class PipimiResponse {
      * @returns {PipimiResponse}
      */
     static error(message, error) {
-        error = error || new Error();
-        return new PipimiResponse(message + ` (${error})`, error, []);
+        return new PipimiResponse(async context => {
+            const err = error || new Error();
+            const msg = `${message} (${err})`;
+            console.error(`Handled error in command ${this.name}`, err);
+            await context.message.channel.send(msg);
+        });
+    }
+
+    /**
+    * @returns {PipimiResponse}
+    */
+    static delete() {
+        return new PipimiResponse(async context => {
+            await context.message.delete({ timeout: 0, reason: "deleted by pipimi" });
+        });
     }
 
     /**
      * @returns {PipimiResponse}
      */
     static empty() {
-        return new PipimiResponse(null, null, []);
+        return new PipimiResponse(async () => { });
     }
 
     /**
@@ -148,7 +137,11 @@ class PipimiResponse {
      * @returns {PipimiResponse}
      */
     static compose(...responses) {
-        return new PipimiResponse(null, null, responses);
+        return new PipimiResponse(async context => {
+            for (const response of responses) {
+                await response.callback(context);
+            }
+        });
     }
 }
 

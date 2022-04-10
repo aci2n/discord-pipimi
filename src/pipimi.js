@@ -1,7 +1,7 @@
 import { Client, Message } from 'discord.js';
 import { env, exit } from 'process';
 import { getJishoCommands } from './jisho.js';
-import { handleMeliCommand } from './ml-fetch.js'
+import { getMeliCommands } from './ml-fetch.js'
 import { getSergeantCommands } from './sergeant.js';
 import { getEvalCommands } from './eval.js';
 import { PipimiCommand, PipimiContext } from './framework/command.js';
@@ -17,6 +17,7 @@ if (!API_KEY) {
 
 /** @type {PipimiCommand[]} */
 const COMMANDS = [
+    ...getMeliCommands(),
     ...getJishoCommands(),
     ...getSergeantCommands(),
     ...getEvalCommands()
@@ -29,20 +30,6 @@ const messageHandler = async message => {
     if (message.author.bot) {
         return;
     }
-
-    // legacy commands
-    try {
-        await handleMeliCommand(message);
-    } catch (e) {
-        console.error("An error occurred", e, message);
-        try {
-            await message.channel.send("An error occurred: " + JSON.stringify(e));
-        } catch (e) {
-            console.error("Failed to send error message :(", e);
-        }
-    }
-
-    // framework commands
     const context = new PipimiContext(message);
     for (const command of COMMANDS) {
         await command.evaluate(context);

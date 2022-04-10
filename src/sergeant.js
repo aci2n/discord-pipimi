@@ -34,7 +34,7 @@ const getSergeantCommands = () => {
         }
 
         const customId = movedIds.find(id => customMessages.has(id));
-        return PipimiResponse.success(customId ? customMessages.get(customId) : "👮");
+        return PipimiResponse.send(customId ? customMessages.get(customId) : "👮");
     })]
 };
 

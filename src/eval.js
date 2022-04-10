@@ -14,7 +14,7 @@ const getEvalCommands = () => {
         }
 
         if (!expression) {
-            return PipimiResponse.success("Empty expression.");
+            return PipimiResponse.send("Empty expression.");
         }
 
         let result;
@@ -25,7 +25,7 @@ const getEvalCommands = () => {
             return PipimiResponse.error("Could not evaluate expression", e);
         }
 
-        return PipimiResponse.success(String(result));
+        return PipimiResponse.send(String(result));
     })];
 };
 
