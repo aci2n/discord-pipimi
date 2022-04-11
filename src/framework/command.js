@@ -73,7 +73,6 @@ class PipimiCommand {
         for (const command of commands) {
             try {
                 const nextContext = await command.handler(context);
-
                 if (nextContext) {
                     context = nextContext;
                 } else {
@@ -84,24 +83,6 @@ class PipimiCommand {
             }
         }
         return context;
-    }
-
-    static async executeSingle(command, initial) {
-        let next;
-        try {
-            const start = Date.now();
-            const next = await command.handler(initial);
-            const elapsed = Date.now() - start;
-
-        } catch (e) {
-            return initial;
-        }
-
-        if (next) {
-            context = next;
-        } else {
-            context.l
-        }
     }
 }
 
