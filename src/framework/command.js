@@ -69,7 +69,12 @@ class PipimiCommand {
         let context = initial;
         for (const command of commands) {
             try {
-                context = await command.handler(context);
+                const next = await command.handler(context);
+                if (next) {
+                    context = next;
+                } else {
+                    console.error(`Command '${command.name}' did not return a context`);
+                }
             } catch (e) {
                 console.error(`Error handling command '${command.name}'`, e);
             }

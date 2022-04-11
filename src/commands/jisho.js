@@ -11,10 +11,13 @@ const getJishoCommands = () => {
     const phrase = (context, args) => handlePhraseCommand(context, api, args.trim());
     /** @type {import("../framework/command.js").PrefixCommandHandler} */
     const kanji = (context, args) => handleKanjiCommand(context, api, args.trim()[0]);
+    /** @type {import("../framework/command.js").PrefixCommandHandler} */
+    const tatoe = (context, args) => handleTatoeCommand(context, api, args.trim());
 
     return [
         PipimiCommand.standard("ji", [], phrase),
-        PipimiCommand.standard("kanji", [], kanji)
+        PipimiCommand.standard("kanji", [], kanji),
+        PipimiCommand.standard("tatoe", [], tatoe),
     ];
 };
 
@@ -134,6 +137,65 @@ const handleKanjiCommand = async (context, api, kanji) => {
     }
     if (entry.strokeOrderGifUri) {
         parts.push(`**Stroke order**: ${entry.strokeOrderGifUri}`);
+    }
+
+    await channel.send(parts.join("\n"));
+    return context;
+};
+
+/**
+ * @param {PipimiContext} context
+ * @param {JishoAPI} api
+ * @param {string} phrase 
+ * @returns {Promise<PipimiContext>}
+ */
+const handleTatoeCommand = async (context, api, phrase) => {
+    const { message, logger } = context;
+    const { channel } = message;
+
+    if (!phrase) {
+        logger.debug(() => "Got empty query");
+        await channel.send("Query is empty.");
+        return context;
+    }
+
+    /** @type {import("unofficial-jisho-api").ExampleParseResult} */
+    let apiResponse;
+    try {
+        apiResponse = await api.searchForExamples(phrase);
+    } catch (e) {
+        logger.error(() => `Jisho API error: ${e}`);
+        await channel.send("Jisho API error.");
+        return context;
+    }
+
+    const { results: examples } = apiResponse;
+
+    logger.debug(() => `Got ${examples.length} results from examples search`);
+
+    if (examples.length === 0) {
+        await channel.send(`Did not find examples for '${phrase}'.`);
+        return context;
+    }
+
+    /** @type {string[]} */
+    const parts = [];
+
+    for (const example of examples.slice(0, 5)) {
+        /** @type {string[]} */
+        const lines = [];
+
+        if (example.english) {
+            parts.push(`**English**: ${example.english}`);
+        }
+        if (example.kanji) {
+            parts.push(`**Kanji**: ${example.kanji}`);
+        }
+        if (example.kana) {
+            parts.push(`**Kana**: ${example.kana}`);
+        }
+
+        parts.push(lines.join());
     }
 
     await channel.send(parts.join("\n"));
