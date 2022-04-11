@@ -171,7 +171,7 @@ const handleTatoeCommand = async (context, api, phrase) => {
 
     const { results: examples } = apiResponse;
 
-    logger.debug(() => `Got ${examples.length} results from examples search`);
+    logger.trace(() => `Got ${examples.length} results from examples search`, examples, phrase);
 
     if (examples.length === 0) {
         await channel.send(`Did not find examples for '${phrase}'.`);
