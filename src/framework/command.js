@@ -65,24 +65,43 @@ class PipimiCommand {
 
     /**
      * @param {PipimiCommand[]} commands 
-     * @param {PipimiContext} initial
+     * @param {PipimiContext} initialContext
      * @returns {Promise<PipimiContext>}
      */
-    static async execute(commands, initial) {
-        let context = initial;
+    static async execute(commands, initialContext) {
+        let context = initialContext;
         for (const command of commands) {
             try {
-                const next = await command.handler(context);
-                if (next) {
-                    context = next;
+                const nextContext = await command.handler(context);
+
+                if (nextContext) {
+                    context = nextContext;
                 } else {
-                    console.error(`Command '${command.name}' did not return a context`);
+                    context.logger.error(() => `Command '${command.name}' did not return a context`, command);
                 }
             } catch (e) {
-                console.error(`Error handling command '${command.name}'`, e);
+                context.logger.error(() => `Error handling command '${command.name}'`, e);
             }
         }
         return context;
+    }
+
+    static async executeSingle(command, initial) {
+        let next;
+        try {
+            const start = Date.now();
+            const next = await command.handler(initial);
+            const elapsed = Date.now() - start;
+
+        } catch (e) {
+            return initial;
+        }
+
+        if (next) {
+            context = next;
+        } else {
+            context.l
+        }
     }
 }
 
