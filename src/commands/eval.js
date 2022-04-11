@@ -4,16 +4,10 @@ import { PipimiCommand } from "../framework/command.js";
  * @returns {PipimiCommand[]}
  */
 const getEvalCommands = () => {
-    const delimiter = "```";
-
     return [PipimiCommand.standard("eval", ["sudoers", "hackerman"], async (context, args) => {
         const { logger, message } = context;
         const { channel } = message;
-        let expression = args.trim();
-
-        if (expression.startsWith(delimiter) && expression.endsWith(delimiter)) {
-            expression = expression.substring(delimiter.length, expression.length - delimiter.length);
-        }
+        const expression = extractCodeBlock(args);
 
         if (!expression) {
             await channel.send("Empty expression.");
@@ -37,5 +31,29 @@ const getEvalCommands = () => {
         return context;
     })];
 };
+
+
+const extractCodeBlock = (() => {
+    const delimiters = [
+        { start: /^```\w+\n/, end: /```$/ },
+        { start: /^```/, end: /```$/ }
+    ];
+
+    /**
+     * @param {string} raw 
+     * @returns {string}
+     */
+    return raw => {
+        const str = raw.trim();
+        for (const { start, end } of delimiters) {
+            const head = str.match(start);
+            if (!head) continue;
+            const tail = str.match(end);
+            if (!tail) continue;
+            return str.substring(head[0].length, str.length - tail[0].length).trim();
+        }
+        return str;
+    };
+})();
 
 export { getEvalCommands };
