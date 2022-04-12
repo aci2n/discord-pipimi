@@ -32,13 +32,18 @@ const getKashiCommands = () => {
  * @param {UtatenSearchResult[]} results
  * @returns {string}
  */
-const formatSearchResults = (results) => {
+const formatSearchResults = results => {
     const lines = [];
-    lines.push(`Got ${results.length} results!`);
-    for (const result of results) {
+    const [first] = results;
+    const limit = 5;
+    lines.push(`Got ${results.length} results! <${first.searchUrl}>`);
+    if (results.length > limit) {
+        lines.push(`*(Showing only top ${limit} results)*`);
+    }
+    for (const result of results.slice(0, limit)) {
         lines.push(`- \`${result.title} (${result.artist})\` <${result.lyricsUrl}>`);
     }
-    lines.push(`Fetching lyrics for the first result: \`${results[0].title} (${results[0].artist})\`…`);
+    lines.push(`Fetching lyrics for the first result: \`${first.title} (${first.artist})\`…`);
     return lines.join("\n");
 };
 

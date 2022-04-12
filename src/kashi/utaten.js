@@ -61,13 +61,15 @@ class UtatenSearchResult {
      * @param {string} preview 
      * @param {string} lyricsUrl 
      * @param {string} artistUrl 
+     * @param {string} searchUrl
      */
-    constructor(title, artist, preview, lyricsUrl, artistUrl) {
+    constructor(title, artist, preview, lyricsUrl, artistUrl, searchUrl) {
         this.title = title;
         this.artist = artist;
         this.preview = preview;
         this.lyricsUrl = lyricsUrl;
         this.artistUrl = artistUrl;
+        this.searchUrl = searchUrl;
         Object.freeze(this);
     }
 
@@ -146,7 +148,8 @@ class UtatenAPI {
         const params = new URLSearchParams();
         if (query.title) params.append("title", query.title);
         if (query.artist) params.append("artist_name", query.artist);
-        const dom = await this._fetchDom(`${ORIGIN}${SEARCH_PATH}?${params.toString()}`);
+        const searchUrl = `${ORIGIN}${SEARCH_PATH}?${params.toString()}`;
+        const dom = await this._fetchDom(searchUrl);
 
         return Array.from(dom.window.document.querySelectorAll(".searchResult__title"))
             .map(node => node.parentElement.parentElement)
@@ -159,7 +162,7 @@ class UtatenAPI {
                 const preview = previewNode.textContent.trim();
                 const lyricsUrl = ORIGIN + titleNode.href.trim();
                 const artistUrl = ORIGIN + artistNode.href.trim();
-                return new UtatenSearchResult(title, artist, preview, lyricsUrl, artistUrl);
+                return new UtatenSearchResult(title, artist, preview, lyricsUrl, artistUrl, searchUrl);
             });
     }
 
