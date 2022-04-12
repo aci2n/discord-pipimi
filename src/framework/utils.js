@@ -11,10 +11,11 @@ class Utils {
     /**
      * @param {string} string 
      * @param {number} size 
-     * @param {string} trail 
+     * @param {(string|undefined)} trail 
      * @returns {string}
      */
     static truncate(string, size, trail) {
+        trail = trail || "…";
         if (string.length <= size) {
             return string;
         }

@@ -127,7 +127,7 @@ class ChannelLogger extends PipimiLogger {
             parts.push(message());
 
             if (objects.length > 0) {
-                const objs = objects.map(obj => `\`${Utils.truncate(JSON.stringify(obj), 200, "…")}\``).join(", ");
+                const objs = objects.map(obj => `\`${Utils.truncate(JSON.stringify(obj), 200)}\``).join(", ");
                 parts.push(`[${objs}]`);
             }
 

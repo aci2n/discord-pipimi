@@ -84,13 +84,15 @@ class UtatenLyricsResult {
      * @param {string} title 
      * @param {string} artist 
      * @param {string} lyrics 
-     * @param {string} coverUrl 
+     * @param {string} lyricsUrl
      * @param {string} artistUrl 
+     * @param {(string|null)} coverUrl 
      */
-    constructor(title, artist, lyrics, artistUrl, coverUrl) {
+    constructor(title, artist, lyrics, lyricsUrl, artistUrl, coverUrl) {
         this.title = title;
         this.artist = artist;
         this.lyrics = lyrics;
+        this.lyricsUrl = lyricsUrl;
         this.artistUrl = artistUrl;
         this.coverUrl = coverUrl;
         Object.freeze(this);
@@ -127,14 +129,13 @@ class UtatenAPI {
         // clean furigana
         Array.from(lyricsNode.querySelectorAll(".rt")).forEach(furigana => furigana.textContent = "");
 
-        const titleWithQuotes = titleNode.textContent.trim();
-        const title = titleWithQuotes.substring(1, titleWithQuotes.length - 1);
+        const title = this._cleanTitle(titleNode.textContent.trim());
         const lyrics = lyricsNode.textContent.trim();
         const artist = artistNode.textContent.trim();
-        const artistUrl = artistNode.href.trim();
-        const coverUrl = coverNode.src.trim();
+        const artistUrl = ORIGIN + artistNode.href.trim();
+        const coverUrl = this._cleanCoverUrl(coverNode.src.trim());
 
-        return new UtatenLyricsResult(title, artist, lyrics, artistUrl, coverUrl);
+        return new UtatenLyricsResult(title, artist, lyrics, url, artistUrl, coverUrl);
     }
 
     /**
@@ -171,6 +172,31 @@ class UtatenAPI {
         const response = await axios.get(url);
         this.logger.debug(() => `Got response from ${url}`, response.data);
         return new JSDOM(response.data);
+    }
+
+    /**
+     * @param {string} title 
+     * @returns {(string|null)}
+     */
+    _cleanTitle(title) {
+        if (title.startsWith("「") && title.endsWith("」")) {
+            return title.substring(1, title.length - 1);
+        }
+        return title;
+    }
+
+    /**
+     * @param {string} coverUrl 
+     * @returns {(string|null)}
+     */
+    _cleanCoverUrl(coverUrl) {
+        if (coverUrl === "/images/common/noImage/lyric/300_300.png") {
+            return null;
+        }
+        if (coverUrl.startsWith("/")) {
+            return ORIGIN + coverUrl;
+        }
+        return coverUrl;
     }
 }
 
