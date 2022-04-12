@@ -1,5 +1,5 @@
 import { PipimiCommand } from "../framework/command.js";
-import { UtatenAPI, UtatenQuery } from "../kashi/utaten.js";
+import { UtatenAPI, UtatenSearchQuery } from "../kashi/utaten.js";
 
 /**
  * @returns {PipimiCommand[]}
@@ -8,7 +8,7 @@ const getKashiCommands = () => {
     return [PipimiCommand.standard("kashi", [], async (context, args) => {
         const { logger, message } = context;
         const { channel } = message;
-        const query = UtatenQuery.fromString(args.trim());
+        const query = UtatenSearchQuery.fromString(args.trim());
         const api = new UtatenAPI(logger);
 
         logger.trace(() => `Searching lyrics for '${query}'`);

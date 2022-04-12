@@ -189,4 +189,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     main(process.argv);
 }
 
-export { UtatenAPI, UtatenSearchQuery as UtatenQuery, UtatenSearchResult, UtatenLyricsResult as UtatenLyrics };
+export { UtatenAPI, UtatenSearchQuery, UtatenSearchResult, UtatenLyricsResult };
