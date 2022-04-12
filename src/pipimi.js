@@ -7,6 +7,7 @@ import { getEvalCommands } from './commands/eval.js';
 import { PipimiCommand, PipimiContext } from './framework/command.js';
 import { getDebugCommands } from './commands/debug.js';
 import { ConsoleLogger, LogLevel, PriorityLogger } from './framework/logger.js';
+import { getKashiCommands } from './commands/kashi.js';
 
 const init = () => {
     const apiKey = env['PIPIMI_API_KEY'];
@@ -22,7 +23,8 @@ const init = () => {
         ...getMeliCommands(),
         ...getJishoCommands(),
         ...getSergeantCommands(),
-        ...getEvalCommands()
+        ...getEvalCommands(),
+        ...getKashiCommands()
     ];
     const prefix = env['PIPIMI_PREFIX'] || "!";
     const client = new Client();
