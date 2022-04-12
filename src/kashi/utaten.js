@@ -5,7 +5,6 @@ import axios from 'axios';
 import { ConsoleLogger, PipimiLogger } from '../framework/logger.js';
 
 const ORIGIN = "https://utaten.com";
-const SEARCH_PATH = "/lyric/search";
 
 class UtatenSearchQuery {
     /**
@@ -147,7 +146,7 @@ class UtatenAPI {
         const params = new URLSearchParams();
         if (query.title) params.append("title", query.title);
         if (query.artist) params.append("artist_name", query.artist);
-        const searchUrl = `${ORIGIN}${SEARCH_PATH}?${params.toString()}`;
+        const searchUrl = `${ORIGIN}/lyric/search?${params.toString()}`;
         const dom = await this._fetchDom(searchUrl);
 
         return Array.from(dom.window.document.querySelectorAll(".searchResult__title"))
