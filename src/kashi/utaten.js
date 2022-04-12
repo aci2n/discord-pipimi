@@ -171,7 +171,7 @@ class UtatenAPI {
     async _fetchDom(url) {
         this.logger.debug(() => `Fetching ${url}`);
         const response = await axios.get(url);
-        this.logger.debug(() => `Got response from ${url}`, response.data);
+        this.logger.debug(() => `Got response from ${url}`, response.headers);
         return new JSDOM(response.data);
     }
 
