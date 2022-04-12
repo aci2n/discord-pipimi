@@ -6,7 +6,6 @@ import { ConsoleLogger, PipimiLogger } from '../framework/logger.js';
 
 const ORIGIN = "https://utaten.com";
 const SEARCH_PATH = "/lyric/search";
-const QUERY_KEYS = ["title", "artist"];
 
 class UtatenSearchQuery {
     /**
@@ -32,20 +31,20 @@ class UtatenSearchQuery {
      */
     static fromString(string) {
         const query = Object.create(null);
-        const tokens = string.split(",").map(token => token.trim());
+        const tokens = string.split(",");
 
         for (const token of tokens) {
-            const colon = token.indexOf(":");
-            if (colon === -1) {
-                for (const key of QUERY_KEYS) {
+            const separator = token.indexOf(":");
+            if (separator === -1) {
+                for (const key of ["title", "artist"]) {
                     if (!query[key]) {
-                        query[key] = token;
+                        query[key] = token.trim();
                         break;
                     }
                 }
             } else {
-                const key = token.substring(0, colon);
-                const value = token.substring(colon + 1);
+                const key = token.substring(0, separator).trim();
+                const value = token.substring(separator + 1).trim();
                 query[key] = value;
             }
         }
