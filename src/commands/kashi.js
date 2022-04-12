@@ -50,7 +50,7 @@ const formatSearchResults = results => {
 /**
  * @param {UtatenLyricsResult} result 
  * @param {number} elapsed 
- * @returns {string[]}
+ * @returns {string}
  */
 const formatLyricsResult = (result, elapsed) => {
     const lines = [];

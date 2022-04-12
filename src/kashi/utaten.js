@@ -202,7 +202,6 @@ class UtatenAPI {
     }
 }
 
-
 const main = async argv => {
     const string = argv[2];
     const json = JSON.parse(string);
