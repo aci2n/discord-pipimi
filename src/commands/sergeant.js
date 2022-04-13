@@ -11,7 +11,7 @@ const getSergeantCommands = () => {
         ["94885721948561408", "<:poque:660633228536971265>"]
     ]);
 
-    return [PipimiCommand.standard("carcel", ["Sergeant"], async context => {
+    return [PipimiCommand.prefixed(["carcel"], ["Sergeant"], async context => {
         const { message, logger } = context;
         const { mentions, client, guild, channel } = message;
 

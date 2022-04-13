@@ -9,19 +9,14 @@ const ORIGIN = "https://www.promiedos.com.ar";
  * @returns {PipimiCommand[]}
  */
 const getFulboCommands = () => {
-    const handler = teamId => (context, _args) => sendNextMatches(context, teamId);
-    const river = handler(18);
-    const boca = handler(6);
-    const aldosivi = handler(22);
+    const command = (aliases, teamId) =>
+        PipimiCommand.prefixed(aliases, [], (context, _args) => sendNextMatches(context, teamId));
 
     return [
-        PipimiCommand.standard("river", [], river),
-        PipimiCommand.standard("rivercito", [], river),
-        PipimiCommand.standard("boca", [], boca),
-        PipimiCommand.standard("boquita", [], boca),
-        PipimiCommand.standard("aldosivi", [], aldosivi),
-        PipimiCommand.standard("tiburon", [], aldosivi),
-        PipimiCommand.standard("fixture", [], (context, args) => sendNextMatches(context, Number.parseInt(args))),
+        command(["river", "rivercito"], 18),
+        command(["boca", "boquita"], 6),
+        command(["aldosivi", "tiburon"], 22),
+        PipimiCommand.prefixed(["fixture"], [], (context, args) => sendNextMatches(context, Number.parseInt(args))),
     ];
 };
 

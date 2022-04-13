@@ -5,7 +5,7 @@ import { UtatenAPI, UtatenLyricsResult, UtatenSearchQuery, UtatenSearchResult } 
  * @returns {PipimiCommand[]}
  */
 const getKashiCommands = () => {
-    return [PipimiCommand.standard("kashi", [], async (context, args) => {
+    return [PipimiCommand.prefixed(["kashi", "kasi"], [], async (context, args) => {
         const { logger, message } = context;
         const { channel } = message;
         const queryString = args.trim();

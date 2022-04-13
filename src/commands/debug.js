@@ -5,8 +5,8 @@ import { ChannelLogger, CompositeLogger, ConsoleLogger, LogLevel, PriorityLogger
  * @returns {PipimiCommand[]}
  */
 const getDebugCommands = () => {
-    return Object.values(LogLevel.LEVELS).map(level => PipimiCommand.standard(
-        level.name,
+    return Object.values(LogLevel.LEVELS).map(level => PipimiCommand.prefixed(
+        [level.name],
         ["sudoers"],
         async (context, args) => await createDebugContext(context, args, level)));
 };

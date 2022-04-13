@@ -4,7 +4,7 @@ import { PipimiCommand } from "../framework/command.js";
  * @returns {PipimiCommand[]}
  */
 const getEvalCommands = () => {
-    return [PipimiCommand.standard("eval", ["sudoers", "hackerman"], async (context, args) => {
+    return [PipimiCommand.prefixed(["eval"], ["sudoers", "hackerman"], async (context, args) => {
         const { logger, message } = context;
         const { channel } = message;
         const expression = extractCodeBlock(args);

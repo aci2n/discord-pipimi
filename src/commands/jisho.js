@@ -15,9 +15,9 @@ const getJishoCommands = () => {
     const tatoe = (context, args) => handleTatoeCommand(context, api, args.trim());
 
     return [
-        PipimiCommand.standard("ji", [], phrase),
-        PipimiCommand.standard("kanji", [], kanji),
-        PipimiCommand.standard("tatoe", [], tatoe),
+        PipimiCommand.prefixed(["ji", "jisho"], [], phrase),
+        PipimiCommand.prefixed(["kanji"], [], kanji),
+        PipimiCommand.prefixed(["tatoe"], [], tatoe),
     ];
 };
 
