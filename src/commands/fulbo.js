@@ -11,8 +11,8 @@ const ORIGIN = "https://www.promiedos.com.ar";
 const getFulboCommands = () => {
     const handler = teamId => (context, _args) => sendNextMatches(context, teamId);
     const river = handler(18);
-    const boca = handler(22);
-    const aldosivi = handler(6);
+    const boca = handler(6);
+    const aldosivi = handler(22);
 
     return [
         PipimiCommand.standard("river", [], river),
