@@ -115,11 +115,11 @@ class UtatenAPI {
     }
 
     /**
-     * @param {string} url 
+     * @param {string} lyricsUrl 
      * @returns {Promise<UtatenLyricsResult>}
      */
-    async fetchLyrics(url) {
-        const dom = await this._fetchDom(url);
+    async fetchLyrics(lyricsUrl) {
+        const dom = await this._fetchDom(lyricsUrl);
         const document = dom.window.document;
         const titleNode = document.querySelector(".newLyricTitle__main").childNodes[0];
         const lyricsNode = document.querySelector(".hiragana");
@@ -135,7 +135,7 @@ class UtatenAPI {
         const artistUrl = ORIGIN + artistNode.href.trim();
         const coverUrl = this._cleanCoverUrl(coverNode.src.trim());
 
-        return new UtatenLyricsResult(title, artist, lyrics, url, artistUrl, coverUrl);
+        return new UtatenLyricsResult(title, artist, lyrics, lyricsUrl, artistUrl, coverUrl);
     }
 
     /**

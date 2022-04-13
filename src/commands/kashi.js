@@ -8,7 +8,14 @@ const getKashiCommands = () => {
     return [PipimiCommand.standard("kashi", [], async (context, args) => {
         const { logger, message } = context;
         const { channel } = message;
-        const query = UtatenSearchQuery.fromString(args.trim());
+        const queryString = args.trim();
+
+        if (!queryString) {
+            await channel.send("Empty search.");
+            return context;
+        }
+
+        const query = UtatenSearchQuery.fromString(queryString);
         const api = new UtatenAPI(logger);
         const start = Date.now();
 

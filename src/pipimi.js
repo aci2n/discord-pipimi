@@ -8,6 +8,7 @@ import { PipimiCommand, PipimiContext } from './framework/command.js';
 import { getDebugCommands } from './commands/debug.js';
 import { ConsoleLogger, LogLevel, PriorityLogger } from './framework/logger.js';
 import { getKashiCommands } from './commands/kashi.js';
+import { getFulboCommands } from './commands/fulbo.js';
 
 const init = () => {
     const apiKey = process.env['PIPIMI_API_KEY'];
@@ -28,7 +29,8 @@ const init = () => {
         ...getJishoCommands(),
         ...getSergeantCommands(),
         ...getEvalCommands(),
-        ...getKashiCommands()
+        ...getKashiCommands(),
+        ...getFulboCommands()
     ];
     const prefix = process.env['PIPIMI_PREFIX'] || "!";
     const client = new Client();
