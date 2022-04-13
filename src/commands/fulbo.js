@@ -3,8 +3,6 @@ import { JSDOM } from "jsdom";
 import { PipimiCommand, PipimiContext } from "../framework/command.js";
 import { PipimiLogger } from "../framework/logger.js";
 
-const ORIGIN = "https://www.promiedos.com.ar";
-
 /**
  * @returns {PipimiCommand[]}
  */
@@ -13,9 +11,9 @@ const getFulboCommands = () => {
         PipimiCommand.prefixed(aliases, [], (context, _args) => sendNextMatches(context, teamId));
 
     return [
-        command(["river", "rivercito"], 18),
-        command(["boca", "boquita"], 6),
-        command(["aldosivi", "tiburon"], 22),
+        command(["river", "rivercito"], 16),
+        command(["boca", "boquita"], 5),
+        command(["aldosivi", "tiburon"], 9739),
         PipimiCommand.prefixed(["fixture"], [], (context, args) => sendNextMatches(context, Number.parseInt(args))),
     ];
 };
@@ -41,9 +39,10 @@ const sendNextMatches = async (context, teamId) => {
         return context;
     }
 
-    const lines = [`${ORIGIN}/images/64/${teamId}.png`];
+    const lines = [`https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/${teamId}.png&w=100&h=100`];
+
     for (const match of nextMatches.slice(0, 5)) {
-        lines.push(`- [${match.condition}] ${match.date} vs ${match.rival}`);
+        lines.push(`- ${match.home} vs ${match.away} [${match.date} ${match.time}] (${match.tournament}) <${match.url}>`);
     }
 
     await channel.send(lines.join("\n"));
@@ -53,24 +52,30 @@ const sendNextMatches = async (context, teamId) => {
 /**
  * @param {number} teamId 
  * @param {PipimiLogger} logger 
- * @returns {Promise<{date: string, condition: ("L"|"V"), rival: string}>}
+ * @returns {Promise<[{home: string, away: string, date: string, time: (string|null), tournament: string, url: string}]>}
  */
 const getNextMatches = async (teamId, logger) => {
-    const url = `${ORIGIN}/club=${teamId}`;
+    const origin = "https://www.espn.com.ar";
+    const url = `${origin}/futbol/equipo/calendario/_/id/${teamId}`;
     logger.debug(() => `Getting next matches from ${url}`);
     const response = await axios.get(url);
-    logger.debug(() => `Got result from promiedos`, response.headers);
+    logger.debug(() => `Got result from espn`, response.headers);
 
     const dom = new JSDOM(response.data);
     const document = dom.window.document;
     const matches = [];
 
-    for (let match = document.querySelector(".sj").parentElement; match; match = match.nextElementSibling) {
-        const [dateNode, _, conditionNode, rivalNode] = Array.from(match.children);
+    for (const matchNode of Array.from(document.querySelectorAll(".Table__TR--sm"))) {
+        const [dateNode, homeNode, _, awayNode, timeNode, tournamentNode] = Array.from(matchNode.children);
+
+        const home = homeNode.textContent.trim();
+        const away = awayNode.textContent.trim();
         const date = dateNode.textContent.trim();
-        const condition = conditionNode.textContent.trim();
-        const rival = rivalNode.textContent.trim();
-        matches.push({ date, condition, rival });
+        const time = timeNode.textContent.trim();
+        const tournament = tournamentNode.textContent.trim();
+        const url = origin + timeNode.querySelector("a").href.trim();
+
+        matches.push({ home, away, date, time, tournament, url });
     }
 
     return matches;
