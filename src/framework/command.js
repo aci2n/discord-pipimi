@@ -27,17 +27,17 @@ class PipimiCommand {
      */
 
     /**
-     * @param {string[]} prefixes 
+     * @param {string[]} aliases 
      * @param {string[]} allowedRoles 
      * @param {PrefixCommandHandler} handler 
      * @returns {PipimiCommand}
      */
-    static prefixed(prefixes, allowedRoles, handler) {
+    static prefixed(aliases, allowedRoles, handler) {
         const allowedRolesSet = new Set(allowedRoles);
-        const escaped = `^(?:${prefixes.map(prefix => Utils.escapeRegExp(prefix)).join("|")})`;
+        const escaped = `^(?:${aliases.map(prefix => Utils.escapeRegExp(prefix)).join("|")})`;
         const pattern = new RegExp(`${escaped}$|${escaped}\\s`);
 
-        return new PipimiCommand(prefixes.join(","), async context => {
+        return new PipimiCommand(aliases.join(","), async context => {
             const { message, prefix, logger } = context;
             const { content, member } = message;
             const roles = member.roles.cache.array();
@@ -50,11 +50,11 @@ class PipimiCommand {
             const match = unprefixed.match(pattern);
 
             if (!match) {
-                logger.trace(() => `Did not match command '${prefixes}'`);
+                logger.trace(() => `Did not match command '${aliases}'`);
                 return context;
             }
 
-            logger.trace(() => `Matched command '${prefixes}'`, match);
+            logger.trace(() => `Matched command '${aliases}'`, match);
 
             if (allowedRolesSet.size > 0 && !roles.some(role => allowedRolesSet.has(role.name))) {
                 return context;
