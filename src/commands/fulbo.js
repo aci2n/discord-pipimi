@@ -38,6 +38,7 @@ const sendNextMatches = async (context, teamId) => {
 
     if (nextMatches.length === 0) {
         await channel.send("No pending matches found.");
+        return context;
     }
 
     const lines = [`${ORIGIN}/images/64/${teamId}.png`];
