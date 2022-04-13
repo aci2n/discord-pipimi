@@ -12,16 +12,20 @@ const getKashiCommands = () => {
         const api = new UtatenAPI(logger);
         const start = Date.now();
 
-        channel.send(`Searching lyrics for \`${query}\`…`); // don't wait
-        const searchResults = await api.searchLyrics(query);
+        const [searchResults] = await Promise.all([
+            api.searchLyrics(query),
+            channel.send(`Searching lyrics for \`${query}\`…`)
+        ]);
 
         if (searchResults.length === 0) {
             await channel.send(`No search results for \`${query}\`.`);
             return context;
         }
 
-        channel.send(formatSearchResults(searchResults)); // don't wait
-        const lyricsResult = await api.fetchLyrics(searchResults[0].lyricsUrl);
+        const [lyricsResult] = await Promise.all([
+            api.fetchLyrics(searchResults[0].lyricsUrl),
+            channel.send(formatSearchResults(searchResults))
+        ]);
 
         await channel.send(formatLyricsResult(lyricsResult, Date.now() - start));
         return context;
