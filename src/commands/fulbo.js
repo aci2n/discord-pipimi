@@ -14,6 +14,7 @@ const getFulboCommands = () => {
         command(["river", "rivercito"], 16),
         command(["boca", "boquita"], 5),
         command(["aldosivi", "tiburon"], 9739),
+        command(["ccsde"], 11989),
         PipimiCommand.prefixed(["fixture"], [], (context, args) => sendNextMatches(context, Number.parseInt(args))),
     ];
 };
