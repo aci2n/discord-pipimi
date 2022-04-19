@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# this scripts runs in the remote server
+# this script runs in the remote server
 
 export PIPIMI_API_KEY=PIPIMI_API_KEY
 
