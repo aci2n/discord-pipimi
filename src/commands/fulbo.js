@@ -73,10 +73,11 @@ const getNextMatches = async (teamId, logger) => {
         const away = awayNode.textContent.trim();
         const date = dateNode.textContent.trim();
         const time = timeNode.textContent.trim();
+        const timestamp = time.split(":");
         const tournament = tournamentNode.textContent.trim();
         const url = origin + timeNode.querySelector("a").href.trim();
 
-        matches.push({ home, away, date, time, tournament, url });
+        matches.push({ home, away, date, time: timestamp.length === 2 ? `${+timestamp[0] + 1}:${timestamp[1]}` : time, tournament, url });
     }
 
     return matches;
