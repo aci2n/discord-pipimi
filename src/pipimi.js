@@ -9,7 +9,6 @@ import { getDebugCommands } from './commands/debug.js';
 import { ConsoleLogger, LogLevel, PriorityLogger } from './framework/logger.js';
 import { getKashiCommands } from './commands/kashi.js';
 import { getFulboCommands } from './commands/fulbo.js';
-import { getOcrCommands } from './commands/ocr/ocr.js';
 
 const init = () => {
     process.on('SIGINT', () => process.exit());
@@ -31,8 +30,7 @@ const init = () => {
         ...getSergeantCommands(),
         ...getEvalCommands(),
         ...getKashiCommands(),
-        ...getFulboCommands(),
-        ...getOcrCommands()
+        ...getFulboCommands()
     ];
     const prefix = process.env['PIPIMI_PREFIX'] || "!";
     const client = new Client();
