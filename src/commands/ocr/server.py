@@ -68,16 +68,20 @@ def make_handler():
 
 
 def main():
-    port = int(sys.argv[1])
+    try:
+        port = int(sys.argv[1])
 
-    print("Launched OCR server", port, os.environ.get(
-        "EASYOCR_MODULE_PATH"), os.environ.get("TRANSFORMERS_CACHE"), flush=True)
+        print("Launched OCR server", port, os.environ.get(
+            "EASYOCR_MODULE_PATH"), os.environ.get("TRANSFORMERS_CACHE"), flush=True)
 
-    with HTTPServer(('localhost', port), make_handler()) as server:
-        print(f"[READY] Starting OCR HTTP Server on port {port}", flush=True)
-        server.serve_forever()
+        with HTTPServer(('localhost', port), make_handler()) as server:
+            print(
+                f"[READY] Starting OCR HTTP Server on port {port}", flush=True)
+            server.serve_forever()
 
-    print(f"OCR HTTP Server stopped", flush=True)
+        print(f"OCR HTTP Server stopped", flush=True)
+    except Exception as e:
+        print("Error initializing OCR server", e, flush=True)
 
 
 if __name__ == "__main__":

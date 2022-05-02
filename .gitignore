@@ -1,4 +1,3 @@
 node_modules
 stdout.log
 stderr.log
-src/commands/ocr/cache

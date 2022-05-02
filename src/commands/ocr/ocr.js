@@ -62,7 +62,7 @@ const initClient = () => {
     const script = path.join(rootDir, "server.py");
     const port = 9001;
     // for docker build: remember to run once locally to download the models which are not in
-    const cacheDir = path.join(rootDir, "cache");
+    const cacheDir = "/tmp/pipimi_ocr_cache";
     const args = [script, port];
     const opts = {
         env: {

@@ -10,7 +10,6 @@ WORKDIR /pipimi
 COPY ["package.json", "package-lock.json", "./"]
 RUN npm ci
 
-# note: this includes OCR models which are not in git
 COPY ["src", "./src"]
 
 CMD ["npm", "start"]
