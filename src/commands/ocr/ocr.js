@@ -28,19 +28,28 @@ const getOcrCommands = () => {
         logger.debug(() => `Image size: ${imageBytes.length} bytes`);
 
         const client = await clientPromise;
-        const results = await client.readText(imageBytes);
+        const results = await client.scanImage(imageBytes, imageResponse.headers['content-type']);
+        const { manga_ocr: mangaOcrResults, easy_ocr: easyOcrResults } = results;
+        const lines = [];
 
-        if (results.length === 0) {
+        if (mangaOcrResults.length === 0 && easyOcrResults.length === 0) {
             await channel.send("Could not detect any text in the image.");
             return context;
         }
 
-        const lines = ["**OCR Results** *(confidence%)*"];
+        if (mangaOcrResults.length > 0) {
+            lines.push(["**MangaOCR Results**"]);
+            for (const result of mangaOcrResults) {
+                lines.push(`- ${result.text}`);
+            }
+        }
 
-        for (const result of results) {
-            const confidence = Math.round(result.confidence * 100);
-            const line = `${result.text} *(${confidence}%)*`;
-            lines.push(line);
+        if (easyOcrResults.length > 0) {
+            lines.push(["**EasyOCR Results** *(confidence%)*"]);
+            for (const result of easyOcrResults) {
+                const confidence = Math.round(result.confidence * 100);
+                lines.push(`- ${result.text} *(${confidence}%)*`);
+            }
         }
 
         await channel.send(lines.join("\n"));
@@ -52,14 +61,18 @@ const initClient = () => {
     const rootDir = path.dirname(fileURLToPath(import.meta.url));
     const script = path.join(rootDir, "server.py");
     const port = 9001;
-    const languages = ["ja"].join(",");
     // for docker build: remember to run once locally to download the models which are not in
-    const modelDir = path.join(rootDir, "models");
-    const args = [script, port, languages, modelDir];
+    const cacheDir = path.join(rootDir, "cache");
+    const args = [script, port];
+    const opts = {
+        env: {
+            "TRANSFORMERS_CACHE": path.join(cacheDir, "manga_ocr/transformers"),
+            "EASYOCR_MODULE_PATH": path.join(cacheDir, "easy_ocr")
+        }
+    };
 
-    console.log(`Starting OCR server`, args);
-
-    const server = child_process.spawn("python3", args);
+    console.log(`Starting OCR server`, args, opts);
+    const server = child_process.spawn("python3", args, opts);
 
     process.on("exit", () => {
         console.log("Stopping OCR server");
@@ -73,11 +86,11 @@ const initClient = () => {
     server.on('close', code => console.log(`OCR server exited with code ${code}`));
 
     const client = {
-        async readText(imageBytes) {
+        async scanImage(imageBytes, contentType) {
             console.log(`Making OCR request (image size: ${imageBytes.length} bytes)`);
             try {
                 const response = await axios.post(`http://localhost:${port}`, imageBytes, {
-                    headers: { "Content-Type": "application/octet-stream" }
+                    headers: { "Content-Type": contentType || "application/octet-stream" }
                 });
                 console.log(`Got response from OCR server`, response.headers);
                 return response.data;
