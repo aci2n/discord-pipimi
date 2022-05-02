@@ -1,7 +1,7 @@
 {
     "name": "discord-pipimi",
-    "version": "0.0.1",
-    "description": "This is a Discord bot.",
+    "version": "1.0.0",
+    "description": "Discord pipimi bot with miscellaneous commands.",
     "main": "pipimi.js",
     "type": "module",
     "scripts": {
@@ -14,10 +14,10 @@
         "unofficial-jisho-api": "^2.3.0"
     },
     "engines": {
-        "node": "17.x"
+        "node": "18.x"
     },
     "repository": {
-        "url": "https://github.com/acalace/discord-pipime"
+        "url": "https://github.com/aci2n/discord-pipimi"
     },
     "license": "GPLv3",
     "keywords": [

@@ -9,18 +9,19 @@ import { getDebugCommands } from './commands/debug.js';
 import { ConsoleLogger, LogLevel, PriorityLogger } from './framework/logger.js';
 import { getKashiCommands } from './commands/kashi.js';
 import { getFulboCommands } from './commands/fulbo.js';
+import { getOcrCommands } from './commands/ocr/ocr.js';
 
 const init = () => {
+    process.on('SIGINT', () => process.exit());
+    process.on('SIGTERM', () => process.exit());
+    process.on("unhandledRejection", (reason, promise) => console.error('Unhandled Rejection at:', promise, 'reason:', reason));
+
     const apiKey = process.env['PIPIMI_API_KEY'];
 
     if (!apiKey) {
         console.error(`should have a Discord API key in the PIPIMI_API_KEY environment variable`);
         process.exit(1);
     }
-
-    process.on("unhandledRejection", (reason, promise) => {
-        console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-    });
 
     /** @type {PipimiCommand[]} */
     const commands = [
@@ -30,7 +31,8 @@ const init = () => {
         ...getSergeantCommands(),
         ...getEvalCommands(),
         ...getKashiCommands(),
-        ...getFulboCommands()
+        ...getFulboCommands(),
+        ...getOcrCommands()
     ];
     const prefix = process.env['PIPIMI_PREFIX'] || "!";
     const client = new Client();
@@ -42,6 +44,7 @@ const init = () => {
         }
         await PipimiCommand.execute(commands, new PipimiContext(message, prefix, logger));
     });
+    client.on('ready', () => logger.debug(() => "Discord client is ready."));
     client.login(apiKey);
 };
 
