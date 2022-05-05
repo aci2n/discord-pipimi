@@ -9,6 +9,7 @@ import { getDebugCommands } from './commands/debug.js';
 import { ConsoleLogger, LogLevel, PriorityLogger } from './framework/logger.js';
 import { getKashiCommands } from './commands/kashi.js';
 import { getFulboCommands } from './commands/fulbo.js';
+import { getKotobaCommands } from './commands/kotoba/kotoba.js';
 
 const init = () => {
     process.on('SIGINT', () => process.exit());
@@ -30,7 +31,8 @@ const init = () => {
         ...getSergeantCommands(),
         ...getEvalCommands(),
         ...getKashiCommands(),
-        ...getFulboCommands()
+        ...getFulboCommands(),
+        ...getKotobaCommands()
     ];
     const prefix = process.env['PIPIMI_PREFIX'] || "!";
     const client = new Client();
