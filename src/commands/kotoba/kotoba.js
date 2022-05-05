@@ -1,6 +1,7 @@
 import { PipimiCommand, PipimiContext } from "../../framework/command.js";
 import { getDictionary } from "./dictionary.js";
-import { Session } from "./session.js";
+import { KotobaSession, KotobaEvent } from "./session.js";
+import { env } from "process";
 
 /**
  * @return {PipimiCommand[]}
@@ -15,11 +16,12 @@ const getKotobaCommands = () => {
  * @param {import("./dictionary.js").Dictionary} dictionary
  */
 const getKotobaHandler = dictionary => {
-    /** @type {Map.<String, Session>} */
+    /** @type {Map.<String, KotobaSession>} */
     const sessions = new Map();
-    const triggers = new Set(["koto", "kotoba", "言葉", "こと", "ことば"]);
+    const prefix = env["PIPIMI_KOTOBA_PREFIX"] || "";
+    const triggers = new Set(["koto", "kotoba", "言葉", "こと", "ことば"].map(trigger => prefix + trigger));
     const { words } = dictionary;
-    const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
+    const wordProvider = () => words[Math.floor(Math.random() * words.length)];
 
     /**
      * @param {PipimiContext} context
@@ -27,67 +29,99 @@ const getKotobaHandler = dictionary => {
      */
     return async context => {
         const { message } = context;
-        const { channel, author, content } = message;
+        const { author, content: answer, channel } = message;
         const { id: userId } = author;
 
-        if (!sessions.has(userId) && !triggers.has(content)) {
+        if (!sessions.has(userId) && !triggers.has(answer)) {
             return context;
         }
 
-        const session = sessions.get(userId);
-        const result = computeNextSession(context, session, getRandomWord);
-
-        if (result.session) {
-            sessions.set(userId, result.session);
-        } else {
-            sessions.delete(userId);
-        }
-
-        await channel.send(result.message);
+        const event = new KotobaEvent({ sessions, userId, answer, channel, wordProvider, timeout: false })
+        await processEvent(event);
 
         return context;
     };
 };
 
 /**
- * @param {PipimiContext} context
- * @param {Session} session 
- * @param {() => Word} getRandomWord
- * @returns {{session: Session, message: string}
+ * @param {KotobaEvent} event 
+ * @returns {Promise<{session: KotobaSession, message: string>}
  */
-const computeNextSession = (context, session, getRandomWord) => {
-    const { message } = context;
-    const { content: answer, author } = message;
-    const mention = `<@${author.id}>`;
+const processEvent = async event => {
+    const { sessions, channel, userId } = event;
+    const result = computeNextSession(event);
+
+    if (result.session) {
+        sessions.set(userId, result.session);
+    } else {
+        sessions.delete(userId);
+    }
+
+    await channel.send(result.message);
+
+    return result;
+};
+
+/**
+ * @param {KotobaEvent} event
+ * @returns {{session: KotobaSession, message: string}
+ */
+const computeNextSession = event => {
+    const session = event.sessions.get(event.userId);
+    const mention = `<@${event.userId}>`;
+    const scheduleTimeout = timeout => setTimeout(() => processEvent(new KotobaEvent({ ...event, timeout: true })), timeout);
 
     if (!session) {
-        const challenge = getRandomWord();
+        const challenge = event.wordProvider();
+        const timeout = getTimeout(0);
+        const timeoutId = scheduleTimeout(timeout);
+
         return {
-            session: new Session({ challenge, streak: 0 }),
-            message: `Let's go ${mention}!\nWrite the kana for: ${formatWord(challenge)}`
+            session: new KotobaSession({ challenge, streak: 0, timeoutId }),
+            message: `Let's go ${mention}!\nWrite the kana for: ${formatWord(challenge)}\n*(you have ${timeout}ms)*`
         };
     }
 
+    clearTimeout(session.timeoutId);
+
     const readings = session.challenge.kana.map(kana => kana.text);
 
-    if (readings.some(reading => reading === answer)) {
-        const challenge = getRandomWord();
+    if (event.timeout) {
+        return {
+            session: null,
+            message: `Time's up ${mention}!\nValid answers were: **${formatReadings(readings)}**`
+        };
+    }
+
+    if (readings.some(reading => reading === event.answer)) {
+        const challenge = event.wordProvider();
         const streak = session.streak + 1;
-        const otherReadings = readings.filter(reading => reading !== answer);
+        const otherReadings = readings.filter(reading => reading !== event.answer);
+        const timeout = getTimeout(streak);
+        const timeoutId = scheduleTimeout(timeout);
         let message = `Correct ${mention}!`;
 
         if (otherReadings.length > 0) {
             message += ` Other valid answers were: ${formatReadings(otherReadings)}`
         }
         message += `\nNow write the kana for: ${formatWord(challenge)}`;
+        message += `\n*(you have ${timeout}ms)*`;
 
-        return { session: new Session({ challenge, streak }), message };
+        return { session: new KotobaSession({ challenge, streak, timeoutId }), message };
     }
 
     return {
         session: null,
         message: `Wrong ${mention}!\nValid answers were **${formatReadings(readings)}**\nYour streak was: **${session.streak}**!`
     };
+};
+
+/**
+ * @param {number} streak 
+ * @returns {number}
+ */
+const getTimeout = streak => {
+    return Math.max(5000, 12000 - streak * 200);
 };
 
 /**
