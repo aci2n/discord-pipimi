@@ -2,3 +2,4 @@ node_modules
 stdout.log
 stderr.log
 jmedict.json
+.env
